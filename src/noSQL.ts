@@ -1,4 +1,5 @@
 import { Request, Response } from "express"
+import path from "path"
 import { getDb } from "./db/connectDb"
 
 export const noSqlDemo = async (req: Request, res: Response) => {
@@ -10,7 +11,8 @@ export const noSqlDemo = async (req: Request, res: Response) => {
 
     // Seed some data
     const users = await db.collection("users").find().toArray()
-    console.log(users)
 
-    res.send("Hello world!")
+    res.render("index", {
+        users,
+    })
 }

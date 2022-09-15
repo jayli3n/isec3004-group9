@@ -6,6 +6,8 @@ import { seedData } from "./src/seedData"
 // Setup server
 const app: Express = express()
 
+app.set("view engine", "hbs")
+
 app.get("/", (req: Request, res: Response) => {
     res.send("Hello world!")
 })
