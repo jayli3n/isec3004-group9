@@ -25,26 +25,7 @@ Head to: http://localhost:8000
 
 ## End points:
 
--   home (prints hell world):
-
-```
-/
-```
-
--   seed basic data and return to browser for debug only
-
-```
-/seed
-```
-
--   login form
-
-```
-/login
-```
-
--   welcome page after logged in
-
-```
-/welcome
-```
+-   home (prints hell world): `/`
+-   seed basic data and return to browser for debug only: `/seed`
+-   login form: `/login`
+-   welcome page after logged in: `/welcome`
