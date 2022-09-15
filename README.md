@@ -1,14 +1,29 @@
 # isec3004-group9
 
--   no sql injection
--   javascript module hijacking
+## Demo for:
+
+-   NoSQL Injection
+-   DOM Based XSS
+
+## Initial setup:
+
+-   Install node and npm to OS
+-   run `npm install`
+-   Download and install mongoDB for your OS `https://www.mongodb.com/try/download/community`
+-   Create db folder for MongoDB to work:
+    ```
+    cd C:\
+    md "\data\db"
+    ```
+
+## Daily dev:
 
 ```
 npm run dev
-goto: http://localhost:8000
+Head to: http://localhost:8000
 ```
 
-End points:
+## End points:
 
 -   home (prints hell world):
 
