@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express"
 import { SERVER_PORT } from "./src/constants"
-import { noSqlDemo } from "./src/noSQL"
+import { loginGet, loginPost } from "./src/login"
 import { seedData } from "./src/seedData"
 
 // Setup server
@@ -14,7 +14,9 @@ app.get("/", (req: Request, res: Response) => {
 
 app.get("/seed", seedData)
 
-app.get("/nosql", noSqlDemo)
+app.get("/login", loginGet)
+
+app.post("/login", loginPost)
 
 app.listen(SERVER_PORT, () => {
     console.log(`⚡️[server]: Server is running at https://localhost:${SERVER_PORT}`)

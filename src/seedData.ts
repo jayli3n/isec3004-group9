@@ -10,8 +10,8 @@ export const seedData = async (req: Request, res: Response) => {
 
     // Seed some data
     const users = db.collection("users")
-    users.deleteMany({})
-    await users.insertMany([
+    await users.deleteMany({})
+    const result = await users.insertMany([
         {
             username: "christine",
             password: "1234",
@@ -29,5 +29,6 @@ export const seedData = async (req: Request, res: Response) => {
             password: "1234",
         },
     ])
-    res.send("Data seeded!")
+
+    res.json(await users.find().toArray())
 }
