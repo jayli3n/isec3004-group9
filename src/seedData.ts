@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { connectDb, getDb } from "./db/connectDb"
+import { getDb } from "./db/connectDb"
 
 export const seedData = async (req: Request, res: Response) => {
     const db = await getDb()
