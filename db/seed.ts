@@ -10,7 +10,12 @@ async function main() {
     await client.connect()
     console.log("Connected successfully to db")
     const db = client.db(DB_NAME)
-    // const collection = db.collection("documents")
+    // db.createCollection("users",
+    //     {
+    //         metaField: string,
+    //         granularity: string
+    //     }
+    //  )
     return "done."
 }
 
