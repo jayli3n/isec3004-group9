@@ -1,0 +1,23 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Welcome {{username}}</title>
+        <style></style>
+    </head>
+    <body>
+        <h1>Welcome, {{username}}</h1>
+
+        <div>
+            <p>Logged in as user...</p>
+            <a href="/logout">logout</a>
+        </div>
+
+        <h2>
+            Posts
+        </h2>
+
+        {{#each posts}}
+            <h1>{{username}}: {{title}}</h1>
+        {{/each}}
+    </body>
+</html>
