@@ -43,7 +43,7 @@ export const loginPage = async (req: Request, res: Response) => {
 
     // If request contains login details, attempt to log them in
     if (req.query.username && req.query.password) {
-        console.log("Login request received: ", req.query)
+        console.log("🟡 Login request received: ", req.query)
 
         const db = await getDb()
         if (!db) {
@@ -54,11 +54,13 @@ export const loginPage = async (req: Request, res: Response) => {
         // Check if username and password are correct, if yes, redirect to welcome page
         const user = await db.collection("users").findOne({ username: req.query.username, password: req.query.password })
         if (user) {
+            console.log("🟢 Successfully logged in.")
             loggedInUserID = user._id
             res.redirect("/welcome")
             return
         }
 
+        console.log("🔴 Incorrect username and password.")
         res.redirect("/login")
         return
     }
