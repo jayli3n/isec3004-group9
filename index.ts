@@ -13,7 +13,7 @@ app.set("view engine", "hbs")
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// Root route, just prints hell world
+// Root route, show index page
 app.get("/", (req: Request, res: Response) => {
     res.render("index")
 })
