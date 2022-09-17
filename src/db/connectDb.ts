@@ -8,7 +8,7 @@ export const connectDb = async () => {
     try {
         // Connect to db
         await client.connect()
-        console.log("Connected successfully to db.")
+        console.log("Successfully connected to db.")
 
         // Get db
         db = client.db()

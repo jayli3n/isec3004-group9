@@ -62,6 +62,7 @@
         <div class="main">
             <h1>Available Endpoints:</h1>
             <a href="/">/</a>
+            <a href="/seed">/seed</a>
             <a href="/login">/login</a>
             <a href="/welcome">/welcome</a>
             <a href="/logout">/logout</a>
@@ -70,14 +71,14 @@
 		<div class="main">
 			<h1>NoSql Login Form</h1>
 
-			<form method="post" action="/login">
+			<form method="get" action="/login">
 				<div class="question">
-					<strong><label for="content">Username: </label></strong>
+					<strong><label for="username">Username: </label></strong>
 					<input type="text" name="username" placeholder="Username"></input>
 				</div>
 
 				<div class="question">
-					<b><label for="content">Password: </label></b>
+					<b><label for="password">Password: </label></b>
 					<input type="password" name="password" placeholder="Password"></input>
 				</div>
 

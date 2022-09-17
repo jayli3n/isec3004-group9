@@ -22,3 +22,9 @@
 npm run dev
 Head to: http://localhost:8000/
 ```
+
+## NoSQL Injection:
+
+```
+Visit: http://localhost:8000/login?username=james&password[%24ne]=
+```

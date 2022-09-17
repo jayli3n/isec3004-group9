@@ -1,7 +1,8 @@
 import express, { Express, Request, Response } from "express"
 import { SERVER_PORT } from "./src/constants"
-import { loginPage, loginPost, logout, seedData, welcomePage } from "./src/noSQL"
+import { loginPage, logout, seedData, welcomePage } from "./src/noSQL"
 import bodyParser from "body-parser"
+import { logRequests } from "./src/middlewares"
 
 // Setup server
 const app: Express = express()
@@ -10,6 +11,7 @@ const app: Express = express()
 app.set("view engine", "hbs")
 
 // Middlewares
+app.use(logRequests)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -23,9 +25,6 @@ app.get("/seed", seedData)
 
 // Login page
 app.get("/login", loginPage)
-
-// Handle login post
-app.post("/login", loginPost)
 
 // Logout
 app.get("/logout", logout)

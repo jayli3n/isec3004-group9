@@ -41,30 +41,29 @@ export const loginPage = async (req: Request, res: Response) => {
         return
     }
 
-    const db = await getDb()
-    if (!db) {
-        res.status(500).send("Server failed to initialize db.")
+    // If request contains login details, attempt to log them in
+    if (req.query.username && req.query.password) {
+        console.log("Login request received: ", req.query)
+
+        const db = await getDb()
+        if (!db) {
+            res.status(500).send("Server failed to initialize db.")
+            return
+        }
+
+        // Check if username and password are correct, if yes, redirect to welcome page
+        const user = await db.collection("users").findOne({ username: req.query.username, password: req.query.password })
+        if (user) {
+            loggedInUserID = user._id
+            res.redirect("/welcome")
+            return
+        }
+
+        res.redirect("/login")
         return
     }
 
     res.render("login")
-}
-
-export const loginPost = async (req: Request, res: Response) => {
-    const db = await getDb()
-    if (!db) {
-        res.status(500).send("Server failed to initialize db.")
-        return
-    }
-
-    // Check if username and password are correct, if yes, redirect to welcome page
-    const user = await db.collection("users").findOne({ username: req.body.username, password: req.body.password })
-    if (user) {
-        loggedInUserID = user._id
-        res.redirect("/welcome")
-    }
-
-    res.redirect("/login")
 }
 
 export const logout = async (req: Request, res: Response) => {
