@@ -18,6 +18,7 @@
 				
 				.main {
 					width: 450px;
+					margin: 10px;
 					padding: 8px 35px;
 					padding-bottom: 20px;
 					background-color: #E7F6F2;
@@ -47,11 +48,25 @@
 					border-radius: 4px;
 					border: none;
 					cursor: pointer;
+					font-weight: bold;
 				}
+
+				a { font-weight: bold; align-self: flex-start;
+				display: inline-block;
+            margin: 4px 0; background-color: #395B64; color: #FFFFFF; padding: 8px 12px; border-radius: 4px; border: none; cursor: pointer; text-decoration:
+            none;}
 			</style>
 	</head>
 	
 	<body>
+        <div class="main">
+            <h1>Available Endpoints:</h1>
+            <a href="/">/</a>
+            <a href="/login">/login</a>
+            <a href="/welcome">/welcome</a>
+            <a href="/logout">/logout</a>
+        </div>
+
 		<div class="main">
 			<h1>NoSql Login Form</h1>
 

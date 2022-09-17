@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // Root route, just prints hell world
 app.get("/", (req: Request, res: Response) => {
-    res.send("Hello world!")
+    res.render("index")
 })
 
 // Seeds data
