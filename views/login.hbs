@@ -3,23 +3,70 @@
 	<head>
 			<meta charset="UTF-8" />
 			<title>Login</title>
-			<style></style>
+			<style>
+				body {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 100vw;
+					height: 100vh;
+					overflow: hidden;
+					font-family: Arial, Helvetica, sans-serif;
+					background-color: #2C3333;
+				}
+				
+				.main {
+					width: 450px;
+					padding: 8px 35px;
+					padding-bottom: 20px;
+					background-color: #E7F6F2;
+					border-radius: 9px;
+				}
+
+				h1 {
+					color: #395B64;
+				}
+
+				.question {
+					display: flex;
+					flex-direction: column;
+					margin-bottom: 12px;
+				}
+
+				input {
+					margin: 3px 0;
+					padding: 6px;
+				}
+
+				button {
+					margin: 8px 0;
+					background-color: #395B64;
+					color: #FFFFFF;
+					padding: 8px 12px;
+					border-radius: 4px;
+					border: none;
+					cursor: pointer;
+				}
+			</style>
 	</head>
+	
 	<body>
-		<h1>NoSql Login Form</h1>
+		<div class="main">
+			<h1>NoSql Login Form</h1>
 
-		<form method="post" action="/login">
-			<p>
-				<b><label for="content">Username: </label></b>
-				<input type="text" name="username" placeholder="Username"></input>
-			</p>
+			<form method="post" action="/login">
+				<div class="question">
+					<b><label for="content">Username: </label></b>
+					<input type="text" name="username" placeholder="Username"></input>
+				</div>
 
-			<p>
-				<b><label for="content">Password: </label></b>
-				<input type="password" name="password" placeholder="Password"></input>
-			</p>
+				<div class="question">
+					<b><label for="content">Password: </label></b>
+					<input type="password" name="password" placeholder="Password"></input>
+				</div>
 
-			<button type="submit">Submit</button>
-		</form>
+				<button type="submit">SUBMIT</button>
+			</form>
+		</div>
 	</body>
 </html>
