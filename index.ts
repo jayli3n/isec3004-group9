@@ -21,7 +21,7 @@ app.get("/", (req: Request, res: Response) => {
 })
 
 // Seeds data
-app.get("/seed", seedData)
+app.get("/seed-data", seedData)
 
 // Login page
 app.get("/login", loginPage)
