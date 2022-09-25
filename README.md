@@ -15,6 +15,8 @@
 
 ### NoSQL Injection:
 
+Log in as any existing user.
+
 -   Enter `james` as the username
 -   Enter `{ "$ne": "" }` as the password
 
