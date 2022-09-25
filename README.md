@@ -9,7 +9,7 @@
 
 -   download and install [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 -   run `make -i docker-build`
--   go to: `http://localhost:8000/`
+-   go to: `http://localhost:8001/`
 
 ---
 
@@ -28,5 +28,5 @@
 
 ```bash
 # Injection #1
-Visit: http://localhost:8000/login?username=james&password[%24ne]=
+Visit: http://localhost:8001/login?username=james&password[%24ne]=
 ```
