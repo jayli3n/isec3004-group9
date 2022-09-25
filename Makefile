@@ -18,6 +18,22 @@ docker-remove:
 	docker rm $(DOCKER_CONTAINER)
 
 # ------------------------------------------------------------------------------
+# Docker, build for lecturer
+# ------------------------------------------------------------------------------
+.PHONY: docker-build
+docker-build:
+	docker network rm isec3004group9-network
+	docker network create --driver bridge isec3004group9-network
+	docker build -f DeployDb.Dockerfile -t isec3004group9-db-build .
+	docker build -f DeployServer.Dockerfile -t isec3004group9-server-build .
+	docker stop isec3004group9-db-build
+	docker stop isec3004group9-server-build
+	docker rm isec3004group9-db-build
+	docker rm isec3004group9-server-build
+	docker run -d -p 27017:27017 --network isec3004group9-network --name isec3004group9-db-build isec3004group9-db-build
+	docker run -d -p 8000:8000 --network isec3004group9-network --name isec3004group9-server-build isec3004group9-server-build
+
+# ------------------------------------------------------------------------------
 # Server stuff
 # ------------------------------------------------------------------------------
 .PHONY: init

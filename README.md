@@ -5,18 +5,24 @@
 -   NoSQL Injection
 -   DOM Based XSS
 
+## Build: hand in for lecturer:
+
+-   download and install [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+-   run `make -i docker-build`
+-   go to: `http://localhost:8000/`
+
+---
+
 ## Initial setup:
 
--   Download and install Docker for your OS `https://www.docker.com/products/docker-desktop/`
--   Install node and npm to OS
+-   download and install [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+-   install node and npm
 -   run `make init`
 
 ## Daily dev:
 
-```bash
-make dev
-Head to: http://localhost:8000/
-```
+-   run `make dev`
+-   go to: `http://localhost:8000/`
 
 ## NoSQL Injection:
 

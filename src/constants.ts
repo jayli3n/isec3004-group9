@@ -1,5 +1,5 @@
 export const SERVER_PORT = 8000
-export const DB_URL = "mongodb://localhost:27017/isec3004"
+export const DB_URL = `mongodb://${process.env.DB_HOSTNAME || "localhost"}:27017/isec3004`
 
 export interface User {
     username: string
