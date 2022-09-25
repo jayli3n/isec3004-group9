@@ -13,9 +13,7 @@
 -   Run `make -i docker-build`
 -   Go to: `http://localhost:8001/`
 
-### NoSQL Injection:
-
-Injection #1:
+#### NoSQL Injection:
 
 -   Enter `james` as the username
 -   Enter `{ "$ne": "" }` as the password
