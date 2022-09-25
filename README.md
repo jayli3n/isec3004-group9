@@ -15,10 +15,10 @@
 
 ### NoSQL Injection:
 
-```bash
-# Injection #1
-Visit: http://localhost:8001/login?username=james&password[%24ne]=
-```
+Injection #1:
+
+-   Enter `james` as the username
+-   Enter `{ "$ne": "" }` as the password
 
 # For developers
 

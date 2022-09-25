@@ -73,9 +73,9 @@
         </div>
 
 		<div class="main">
-			<h1>NoSql Login Form <span style="color: darkgreen;">{{extra_text}}</span></h1>
+			<h1>NoSql Login Form{{#if isSafe}}<span style="color: #3D84DB;"> (SAFE)</span>{{/if}}</h1>
 
-			<form method="get" action="/login">
+			<form method="get" action={{#if isSafe}}"/login-safe"{{else}}"/login"{{/if}}>
 				<div class="question">
 					<strong><label for="username">Username: </label></strong>
 					<input type="text" name="username" placeholder="Username"></input>
@@ -83,10 +83,12 @@
 
 				<div class="question">
 					<b><label for="password">Password: </label></b>
-					<input type="password" name="password" placeholder="Password"></input>
+					<input type="text" name="password" placeholder="Password"></input>
 				</div>
 
 				<button type="submit">SUBMIT</button>
+
+				<p style="color: red;">{{errorMessage}}</p>
 			</form>
 		</div>
 	</body>
