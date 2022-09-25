@@ -7,7 +7,7 @@ LOCAL_DEV_DB_PORT=27017
 # ------------------------------------------------------------------------------
 .PHONY: docker-start
 docker-start:
-	docker start $(DOCKER_CONTAINER) || docker run -d -p $(LOCAL_DEV_DB_PORT):5432 --name $(DOCKER_CONTAINER) mongo:latest
+	docker start $(DOCKER_CONTAINER) || docker run -d -p $(LOCAL_DEV_DB_PORT):27017 --name $(DOCKER_CONTAINER) mongo:latest
 
 .PHONY: docker-stop
 docker-stop:
