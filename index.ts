@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express"
 import { SERVER_PORT } from "./src/constants"
-import { loginPage, logout, seedData, welcomePage } from "./src/noSQL"
+import { indexPage, loginPage, logout, seedData, welcomePage } from "./src/noSQL"
 import bodyParser from "body-parser"
 import { logRequests } from "./src/middlewares"
 
@@ -16,15 +16,16 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // Root route, show index page
-app.get("/", (req: Request, res: Response) => {
-    res.render("index")
-})
+app.get("/", indexPage)
 
 // Seeds data
 app.get("/seed-data", seedData)
 
 // Login page
-app.get("/login", loginPage)
+app.get("/login", (req, res) => loginPage(req, res, false))
+
+// Login page (protection against no sql injection)
+app.get("/login-safe", (req, res) => loginPage(req, res, true))
 
 // Logout
 app.get("/logout", logout)

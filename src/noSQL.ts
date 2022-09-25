@@ -6,6 +6,10 @@ import { getDb } from "./db/connectDb"
 // A very basic way of remember the logged in user, it's not proper auth logic
 let loggedInUserID: ObjectId | undefined
 
+export const indexPage = async (req: Request, res: Response) => {
+    res.render("index", { isLoggedIn: !!loggedInUserID })
+}
+
 // Seeds random data into db
 export const seedData = async (req: Request, res: Response) => {
     const db = await getDb()
@@ -34,7 +38,7 @@ export const seedData = async (req: Request, res: Response) => {
 }
 
 // Returns the login page
-export const loginPage = async (req: Request, res: Response) => {
+export const loginPage = async (req: Request, res: Response, preventNoSQLInjection = false) => {
     // If user is logged in, redirect to welcome page
     if (loggedInUserID) {
         res.redirect("/welcome")
@@ -51,6 +55,14 @@ export const loginPage = async (req: Request, res: Response) => {
             return
         }
 
+        // This code will manually check that password is type string, if not, return error
+        if (preventNoSQLInjection) {
+            if (typeof req.query.username !== "string" || typeof req.query.password !== "string") {
+                res.status(400).send("The data you have entered seems like it could be a NoSQL Injection.")
+                return
+            }
+        }
+
         // Check if username and password are correct, if yes, redirect to welcome page
         const user = await db.collection("users").findOne({ username: req.query.username, password: req.query.password })
         if (user) {
@@ -65,7 +77,11 @@ export const loginPage = async (req: Request, res: Response) => {
         return
     }
 
-    res.render("login")
+    if (preventNoSQLInjection) {
+        res.render("login", { extra_text: "(SAFE)", isLoggedIn: !!loggedInUserID })
+    } else {
+        res.render("login", { isLoggedIn: !!loggedInUserID })
+    }
 }
 
 export const logout = async (req: Request, res: Response) => {
@@ -108,5 +124,6 @@ export const welcomePage = async (req: Request, res: Response) => {
     res.render("welcome", {
         username: user.username,
         posts,
+        isLoggedIn: !!loggedInUserID,
     })
 }

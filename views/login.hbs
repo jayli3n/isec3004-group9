@@ -62,14 +62,18 @@
         <div class="main">
             <h1>Available Endpoints:</h1>
             <a href="/">/</a>
-            <a href="/seed-data">/seed-data</a>
-            <a href="/login">/login</a>
-            <a href="/welcome">/welcome</a>
-            <a href="/logout">/logout</a>
+            {{#if isLoggedIn}}
+                <a href="/welcome">/welcome</a>
+                <a href="/logout">/logout</a>
+            {{else}}
+                <a href="/seed-data">/seed-data</a>
+                <a href="/login">/login</a>
+                <a href="/login-safe">/login-safe</a>
+            {{/if}}
         </div>
 
 		<div class="main">
-			<h1>NoSql Login Form</h1>
+			<h1>NoSql Login Form <span style="color: darkgreen;">{{extra_text}}</span></h1>
 
 			<form method="get" action="/login">
 				<div class="question">
