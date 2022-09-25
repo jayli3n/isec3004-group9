@@ -9,7 +9,7 @@
 
 ### Build:
 
--   Download and install [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+-   Download and install [Docker](https://www.docker.com/products/docker-desktop/)
 -   Run `make -i docker-build`
 -   Go to: `http://localhost:8001/`
 
@@ -24,7 +24,7 @@ Injection #1:
 
 ### Initial setup:
 
--   Download and install [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+-   Download and install [Docker](https://www.docker.com/products/docker-desktop/)
 -   Install node and npm
 -   Run `make init`
 
