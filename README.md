@@ -9,9 +9,9 @@
 
 ### Build:
 
--   download and install [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
--   run `make -i docker-build`
--   go to: `http://localhost:8001/`
+-   Download and install [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+-   Run `make -i docker-build`
+-   Go to: `http://localhost:8001/`
 
 ### NoSQL Injection:
 
@@ -24,11 +24,11 @@ Visit: http://localhost:8001/login?username=james&password[%24ne]=
 
 ### Initial setup:
 
--   download and install [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
--   install node and npm
--   run `make init`
+-   Download and install [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+-   Install node and npm
+-   Run `make init`
 
 ### Daily dev:
 
--   run `make dev`
--   go to: `http://localhost:8000/`
+-   Run `make dev`
+-   Go to: `http://localhost:8000/`
