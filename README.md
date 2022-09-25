@@ -7,24 +7,20 @@
 
 ## Initial setup:
 
+-   Download and install Docker for your OS `https://www.docker.com/products/docker-desktop/`
 -   Install node and npm to OS
--   run `npm install`
--   Download and install mongoDB for your OS `https://www.mongodb.com/try/download/community`
--   Create db folder for MongoDB to work:
-    ```
-    cd C:\
-    md "\data\db"
-    ```
+-   run `make init`
 
 ## Daily dev:
 
-```
-npm run dev
+```bash
+make dev
 Head to: http://localhost:8000/
 ```
 
 ## NoSQL Injection:
 
-```
+```bash
+# Injection #1
 Visit: http://localhost:8000/login?username=james&password[%24ne]=
 ```
