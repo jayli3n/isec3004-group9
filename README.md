@@ -32,3 +32,4 @@ Injection #1:
 
 -   Run `make dev`
 -   Go to: `http://localhost:8000/`
+-   Click `/seed-data` to create dummy data and fake accounts
