@@ -1,4 +1,4 @@
-# isec3004-group9
+# ISEC3004 Group 9
 
 ### Demo for:
 
