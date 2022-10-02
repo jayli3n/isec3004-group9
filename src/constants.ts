@@ -14,19 +14,19 @@ export interface Post {
 export const fakeUsers: User[] = [
     {
         username: "christine",
-        password: "1234",
+        password: "a1234",
     },
     {
         username: "jay",
-        password: "1234",
+        password: "a1234",
     },
     {
         username: "tristan",
-        password: "1234",
+        password: "a1234",
     },
     {
         username: "james",
-        password: "1234",
+        password: "a1234",
     },
 ]
 
