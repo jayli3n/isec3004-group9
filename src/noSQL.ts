@@ -51,10 +51,10 @@ export const loginPage = async (req: Request, res: Response, preventNoSQLInjecti
     let username = req.query.username
     let password = req.query.password
     try {
-        if (req.query.username) username = JSON.parse(req.query.username as string) + ""
+        if (req.query.username) username = JSON.parse(req.query.username as string)
     } catch {}
     try {
-        if (req.query.password) password = JSON.parse(req.query.password as string) + ""
+        if (req.query.password) password = JSON.parse(req.query.password as string)
     } catch {}
 
     // If request contains login details, attempt to log them in
