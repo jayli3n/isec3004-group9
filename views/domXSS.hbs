@@ -1,7 +1,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Welcome {{username}}</title>
+        <title>Index</title>
         <style>
             body { display: flex; align-items: center; justify-content: center; flex-direction: column; width: 100vw; height: 100vh; overflow: hidden;
             font-family: Arial, Helvetica, sans-serif; background-color: #2C3333; } .main { margin: 10px; width: 600px; padding: 8px 35px; padding-bottom: 30px;
@@ -14,7 +14,7 @@
 
     <body>
         <div class="main">
-            <h1>Available Endpoints:</h1>
+            <h1>DOM Based XSS Demo</h1>
             <a href="/">/</a>
             {{#if isLoggedIn}}
                 <a href="/welcome">/welcome</a>
@@ -27,31 +27,9 @@
             <a style="background-color:#3E2F52;" href="/dom-xss">/dom-xss</a>
         </div>
 
-        <div class="main">
-            <h1>Welcome Page</h1>
-
-            <div>
-                <p><strong>Logged in as:</strong> <i>{{username}}</i></p>
-            </div>
-
-        </div>
-
-        <div class="main">
-            <h1>
-                Your posts:
-            </h1>
-
-            <ul>
-                {{#each posts}}
-                    <li>
-                        <p><strong>username:</strong> {{username}}</p>
-                        <p>
-                            <strong>title:</strong>
-                            {{title}}
-                        </p>
-                    </li>
-                {{/each}}
-            </ul>
-        </div>
     </body>
+
+    <script>
+
+    </script>
 </html>

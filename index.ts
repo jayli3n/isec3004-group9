@@ -1,8 +1,9 @@
-import express, { Express, Request, Response } from "express"
-import { SERVER_PORT } from "./src/constants"
-import { indexPage, loginPage, logout, seedData, welcomePage } from "./src/noSQL"
 import bodyParser from "body-parser"
+import express, { Express } from "express"
+import { SERVER_PORT } from "./src/constants"
+import { domXSS } from "./src/domBasedXSS"
 import { logRequests } from "./src/middlewares"
+import { indexPage, loginPage, logout, seedData, welcomePage } from "./src/noSQL"
 
 // Setup server
 const app: Express = express()
@@ -32,6 +33,9 @@ app.get("/logout", logout)
 
 // Welcome page
 app.get("/welcome", welcomePage)
+
+// DOM based XSS
+app.get("/dom-xss", domXSS)
 
 // Start server
 app.listen(SERVER_PORT, () => {
