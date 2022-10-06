@@ -1,7 +1,7 @@
 import bodyParser from "body-parser"
 import express, { Express } from "express"
 import { SERVER_PORT } from "./src/constants"
-import { domXSS } from "./src/domBasedXSS"
+import { domXSS, domXSSsafe } from "./src/domBasedXSS"
 import { logRequests } from "./src/middlewares"
 import { indexPage, loginPage, logout, seedData, welcomePage } from "./src/noSQL"
 
@@ -36,6 +36,9 @@ app.get("/welcome", welcomePage)
 
 // DOM based XSS
 app.get("/dom-xss", domXSS)
+
+// DOM based XSS SAFE
+app.get("/dom-xss-safe", domXSSsafe)
 
 // Start server
 app.listen(SERVER_PORT, () => {
