@@ -152,6 +152,7 @@ export const welcomePage = async (req: Request, res: Response) => {
         res.render("welcome", {
             username: user.username,
             posts,
+            isLoggedIn: !!loggedInUserID,
         })
     }
 }
