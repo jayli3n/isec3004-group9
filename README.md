@@ -30,10 +30,11 @@ Log in as any existing user.
 
 -   Download and install [Docker](https://www.docker.com/products/docker-desktop/)
 -   Install node and npm
--   Run `make init`
+-   Run `make install`
 
 ### Daily dev:
 
+-   Run `make docker-start`
 -   Run `make dev`
 -   Go to: `http://localhost:8000/`
 -   Click `/seed-data` to create dummy data and fake accounts

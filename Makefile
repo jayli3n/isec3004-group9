@@ -36,9 +36,6 @@ docker-build:
 # ------------------------------------------------------------------------------
 # Server stuff
 # ------------------------------------------------------------------------------
-.PHONY: init
-init: install docker-start
-
 .PHONY: install
 install:
 	npm install
