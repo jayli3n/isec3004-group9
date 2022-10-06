@@ -37,33 +37,21 @@
             </form>
         </div>
 
-        <div class ="main">
-            <br> Text Entered: <span id="text-span"></span>
-            <br> Result: <span id="result-span"></span>
+        <div class="main">
+            <br />
+            Text Entered:
+            <span id="text-span"></span>
+            <br />
+            Result:
+            <span id="result-span"></span>
         </div>
 
     </body>
 
     <script>
-        function stringToBinary(inStr) {
-            var result = "";
-            for (var i = 0; i < inStr.length; i++) {
-                result = result + inStr.charCodeAt(i).toString(2) + " ";
-            }
-            return result;
-        }
-        function documentWriteSink() {
-            var textIn = new URLSearchParams(window.location.search).get("textInput");
-            var result = "";
-            console.log(result);
-            //console.log(textIn);
-            result = stringToBinary(textIn);
-            console.log(result);
-            document.getElementById("text-span").innerText = textIn;
-            document.getElementById("result-span").innerText = result;
-            console.log(result);
-            //console.log(textIn);
-        }
+        function stringToBinary(inStr) { var result = ""; for (var i = 0; i < inStr.length; i++) { result = result + inStr.charCodeAt(i).toString(2) + " "; }
+        return result; } function documentWriteSink() { var textIn = new URLSearchParams(window.location.search).get("textInput"); var result = ""; result =
+        stringToBinary(textIn); document.getElementById("text-span").innerText = textIn; document.getElementById("result-span").innerText = result; }
         documentWriteSink();
 
     </script>
