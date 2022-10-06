@@ -22,7 +22,7 @@ Log in as any existing user.
 
 ### DOM-Based XSS
 
--   Enter `asd<script>alert("hello you got hacked, i can steal your cookies!");</script>` in the Text to Binary Converter.
+-   Enter `asdf<script>alert("Malicious code executed, cookies stolen!");</script>` in the Text to Binary Converter.
 
 # For developers
 
