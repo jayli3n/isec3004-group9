@@ -1,5 +1,4 @@
 import { Request, Response } from "express"
-import { appendFile } from "fs"
 import { ObjectId } from "mongodb"
 import { fakePosts, fakeUsers, Post, User } from "./constants"
 import { getDb } from "./db/connectDb"
@@ -127,8 +126,8 @@ export const welcomePage = async (req: Request, res: Response) => {
     }
 
     const user = (await db.collection("users").findOne({ _id: loggedInUserID })) as UserDoc
-    // If user doesn't exist in db, then redirect to login page
 
+    // If user doesn't exist in db, then redirect to login page
     if (!user) {
         res.redirect("/login")
         return
@@ -139,15 +138,14 @@ export const welcomePage = async (req: Request, res: Response) => {
         _id: ObjectId
     }
     const posts = (await db.collection("posts").find({ username: user.username }).toArray()) as PostDoc[]
-    //insert new post works but gives error:
-    //Cannot send headers after they are send to the client
+    // Insert new post works but gives error:
+    // Cannot send headers after they are send to the client
     if (req.query.postTitle) {
-        console.log("Post title!!!!" + req.query.postTitle)
         try {
             db.collection("posts").insertOne({ username: user.username, title: req.query.postTitle })
             res.redirect("/welcome") //called res.redirect twice
         } catch {
-            console.log("failed to insert")
+            console.log("Failed to insert.")
         }
     } else {
         // Render the page
