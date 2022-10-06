@@ -60,18 +60,18 @@
 	
 	<body>
         <div class="main">
-            <h1>Available Endpoints:</h1>
+            <h1>DOM Based XSS Demo</h1>
             <a href="/">/</a>
             {{#if isLoggedIn}}
                 <a href="/welcome">/welcome</a>
                 <a href="/logout">/logout</a>
             {{else}}
                 <a href="/seed-data">/seed-data</a>
-                <a href="/login">/login</a>
-                <a href="/login-safe">/login-safe</a>
+                <a style="background-color:#CF3C3C;" href="/login">/login</a>
+                <a style="background-color:#35A671;" href="/login-safe">/login-safe</a>
             {{/if}}
-            <a style="background-color:#3E2F52;" href="/dom-xss">/dom-xss</a>
-			<a style="background-color:#3E2F52;" href="/dom-xss-safe">/dom-xss-safe</a>
+            <a style="background-color:#CF3C3C;" href="/dom-xss">/dom-xss</a>
+            <a style="background-color:#35A671;" href="/dom-xss-safe">/dom-xss-safe</a>
         </div>
 
 		<div class="main">

@@ -3,7 +3,7 @@
         <meta charset="UTF-8" />
         <title>Welcome {{username}}</title>
         <style>
-            body { display: inline-block; align-items: center; justify-content: center; flex-direction: column; width: 100vw; height: 100vh; overflow:auto;
+            body { display: flex; align-items: center; justify-content: flex-start; flex-direction: column; width: 100vw; height: 100vh; overflow:hidden; overflow-y: auto;
             font-family: Arial, Helvetica, sans-serif; background-color: #2C3333; } .main { margin: 10px; width: 600px; padding: 8px 35px; padding-bottom: 30px;
             background-color: #E7F6F2; border-radius: 9px; } 
             h1 { color: #2C3333;} .question { display: flex; flex-direction: column; margin-bottom: 12px; }
@@ -18,18 +18,18 @@
 
     <body>
         <div class="main">
-            <h1>Available Endpoints:</h1>
+            <h1>DOM Based XSS Demo</h1>
             <a href="/">/</a>
             {{#if isLoggedIn}}
                 <a href="/welcome">/welcome</a>
                 <a href="/logout">/logout</a>
             {{else}}
                 <a href="/seed-data">/seed-data</a>
-                <a href="/login">/login</a>
-                <a href="/login-safe">/login-safe</a>
+                <a style="background-color:#CF3C3C;" href="/login">/login</a>
+                <a style="background-color:#35A671;" href="/login-safe">/login-safe</a>
             {{/if}}
-            <a style="background-color:#3E2F52;" href="/dom-xss">/dom-xss</a>
-            <a style="background-color:#3E2F52;" href="/dom-xss-safe">/dom-xss-safe</a>
+            <a style="background-color:#CF3C3C;" href="/dom-xss">/dom-xss</a>
+            <a style="background-color:#35A671;" href="/dom-xss-safe">/dom-xss-safe</a>
         </div>
 
         <div class="main">
@@ -51,7 +51,7 @@
                     </div>
                     <button type="submit">SUBMIT</button>
             </form>
-            
+
             <h1>
                 Your posts:
             </h1>
