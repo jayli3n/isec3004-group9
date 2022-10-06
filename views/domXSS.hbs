@@ -1,0 +1,65 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Index</title>
+        <style>
+            body { display: flex; align-items: center; justify-content: center; flex-direction: column; width: 100vw; height: 100vh; overflow: hidden;
+            font-family: Arial, Helvetica, sans-serif; background-color: #2C3333; } .main { margin: 10px; width: 600px; padding: 8px 35px; padding-bottom: 30px;
+            background-color: #E7F6F2; border-radius: 9px; } h1 { color: #2C3333; } .question { display: flex; flex-direction: column; margin-bottom: 12px; }
+            input { margin: 3px 0; padding: 6px; } ul {list-style: none; list-style-position:inside; padding: 0;} li { list-style-type: none; background-color:
+            #A5C9CA; margin-bottom: 16px; padding: 16px 30px; border-radius: 8px; } a { display: inline-block;font-weight: bold; align-self: flex-start; margin:
+            4px 0; background-color: #395B64; color: #FFFFFF; padding: 8px 12px; border-radius: 4px; border: none; cursor: pointer; text-decoration: none;}
+        </style>
+    </head>
+
+    <body>
+        <div class="main">
+            <h1>DOM Based XSS Demo</h1>
+            <a href="/">/</a>
+            {{#if isLoggedIn}}
+                <a href="/welcome">/welcome</a>
+                <a href="/logout">/logout</a>
+            {{else}}
+                <a href="/seed-data">/seed-data</a>
+                <a href="/login">/login</a>
+                <a href="/login-safe">/login-safe</a>
+            {{/if}}
+            <a style="background-color:#3E2F52;" href="/dom-xss">/dom-xss</a>
+        </div>
+
+        <div class = "main">
+            <h1>Text to Binary Converter</h1>
+		    <p>Enter text here:</p>
+		    <form id = "myForm" method="GET" action="/dom-xss">
+			    <input type = "text" name = "textInput">
+			    <button type = "submit">Submit</button>
+		    </form>
+        </div>
+    </body>
+
+    <script>
+        function stringToBinary(inStr){
+            var result = "";
+            for(var i=0; i<inStr.length; i++)
+            {
+                result = result + inStr.charCodeAt(i).toString(2) + " "; 
+            }
+            return result;
+            }
+
+        function documentWriteSink(){
+            /*Get SOURCE*/
+            var textIn = (new URLSearchParams(window.location.search)).get('textInput');
+            console.log(textIn + " " + typeof(textIn));
+            /*Do something to textIn->return result (optional)*/
+            /*eg. convert to binary*/
+            var result = "";
+            result = stringToBinary(textIn);
+            /*SINK*/
+            document.write('<div class = "main">' +'<br>' +"Text Entered:  " + textIn + '<br>'
+            + "Result:  " + result + '</div>');/*source->sink*/
+	    }
+        /*RUN*/
+        documentWriteSink();
+    </script>
+</html>

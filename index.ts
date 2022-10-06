@@ -34,5 +34,5 @@ app.get("/welcome", welcomePage)
 
 // Start server
 app.listen(SERVER_PORT, () => {
-    console.log(`⚡️[server]: Server is running at https://localhost:${SERVER_PORT}`)
+    console.log(`⚡️[server]: Server is running at http://localhost:${SERVER_PORT}`)
 })
