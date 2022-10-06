@@ -27,9 +27,21 @@
             <a style="background-color:#3E2F52;" href="/dom-xss">/dom-xss</a>
         </div>
 
+        <div class="main">
+            <h1>Text to Binary Converter</h1>
+            <p>Enter text here:</p>
+            <form id="myForm" method="GET" action="/dom-xss">
+                <input type="text" name="textInput" />
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </body>
 
     <script>
-
+        function stringToBinary(inStr){ var result = ""; for(var i=0; i<inStr.length; i++) { result = result + inStr.charCodeAt(i).toString(2) + " "; } return
+        result; } function documentWriteSink(){ /*Get SOURCE*/ var textIn = (new URLSearchParams(window.location.search)).get('textInput'); console.log(textIn +
+        " " + typeof(textIn)); /*Do something to textIn->return result (optional)*/ /*eg. convert to binary*/ var result = ""; result = stringToBinary(textIn);
+        /*SINK*/ document.write('<div class = "main">' +'<br>' +"Text Entered: " + textIn + '<br>' + "Result: " + result + '</div>');/*source->sink*/ } /*RUN*/
+        documentWriteSink();
     </script>
 </html>

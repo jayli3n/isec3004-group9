@@ -40,6 +40,10 @@ export const fakePosts: Post[] = [
         title: "I ate an apple today.",
     },
     {
+        username: "christine",
+        title: "I ate a cake today.",
+    },
+    {
         username: "jay",
         title: "I ate chicken today.",
     },
