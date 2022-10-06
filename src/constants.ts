@@ -1,5 +1,5 @@
 export const SERVER_PORT = 8000
-export const DB_URL = "mongodb://localhost:27017/isec3004"
+export const DB_URL = `mongodb://${process.env.DB_HOSTNAME || "localhost"}:27017/isec3004`
 
 export interface User {
     username: string
@@ -14,19 +14,19 @@ export interface Post {
 export const fakeUsers: User[] = [
     {
         username: "christine",
-        password: "1234",
+        password: "a1234",
     },
     {
         username: "jay",
-        password: "1234",
+        password: "a1234",
     },
     {
         username: "tristan",
-        password: "1234",
+        password: "a1234",
     },
     {
         username: "james",
-        password: "1234",
+        password: "a1234",
     },
 ]
 

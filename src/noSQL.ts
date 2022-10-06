@@ -77,7 +77,7 @@ export const logout = async (req: Request, res: Response) => {
 // Returns the Welcome page
 export const welcomePage = async (req: Request, res: Response) => {
     // If user is not logged in, redirection to login page
-   
+
     if (!loggedInUserID) {
         res.redirect("/login")
         return
@@ -94,7 +94,7 @@ export const welcomePage = async (req: Request, res: Response) => {
     }
     const user = (await db.collection("users").findOne({ _id: loggedInUserID })) as UserDoc
     // If user doesn't exist in db, then redirect to login page
-    
+
     if (!user) {
         res.redirect("/login")
         return
@@ -105,15 +105,17 @@ export const welcomePage = async (req: Request, res: Response) => {
         _id: ObjectId
     }
     const posts = (await db.collection("posts").find({ username: user.username }).toArray()) as PostDoc[]
-    //insert new post works but gives error: 
+    //insert new post works but gives error:
     //Cannot send headers after they are send to the client
-    if(req.query.postTitle){
-        console.log("Post title!!!!"+req.query.postTitle)
-        try{
-            db.collection("posts").insertOne({username: user.username, title:req.query.postTitle})
-            res.redirect("/welcome")//called res.redirect twice
-        }catch{console.log("failed to insert")}
-    }else{
+    if (req.query.postTitle) {
+        console.log("Post title!!!!" + req.query.postTitle)
+        try {
+            db.collection("posts").insertOne({ username: user.username, title: req.query.postTitle })
+            res.redirect("/welcome") //called res.redirect twice
+        } catch {
+            console.log("failed to insert")
+        }
+    } else {
         // Render the page
         res.render("welcome", {
             username: user.username,
@@ -121,6 +123,3 @@ export const welcomePage = async (req: Request, res: Response) => {
         })
     }
 }
-
-
-

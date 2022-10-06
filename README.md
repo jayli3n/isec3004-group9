@@ -1,30 +1,35 @@
-# isec3004-group9
+# ISEC3004 Group 9
 
-## Demo for:
+### Demo for:
 
 -   NoSQL Injection
 -   DOM Based XSS
 
-## Initial setup:
+# For lecturer / testing
 
--   Install node and npm to OS
--   run `npm install`
--   Download and install mongoDB for your OS `https://www.mongodb.com/try/download/community`
--   Create db folder for MongoDB to work:
-    ```
-    cd C:\
-    md "\data\db"
-    ```
+### Build:
 
-## Daily dev:
+-   Download and install [Docker](https://www.docker.com/products/docker-desktop/)
+-   Run `make -i docker-build`
+-   Go to: `http://localhost:8001/`
 
-```
-npm run dev
-Head to: http://localhost:8000/
-```
+### NoSQL Injection:
 
-## NoSQL Injection:
+Log in as any existing user.
 
-```
-Visit: http://localhost:8000/login?username=james&password[%24ne]=
-```
+-   Enter `james` as the username
+-   Enter `{ "$ne": "" }` as the password
+
+# For developers
+
+### Initial setup:
+
+-   Download and install [Docker](https://www.docker.com/products/docker-desktop/)
+-   Install node and npm
+-   Run `make init`
+
+### Daily dev:
+
+-   Run `make dev`
+-   Go to: `http://localhost:8000/`
+-   Click `/seed-data` to create dummy data and fake accounts

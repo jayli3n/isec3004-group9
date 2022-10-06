@@ -20,10 +20,15 @@
         <div class="main">
             <h1>Available Endpoints:</h1>
             <a href="/">/</a>
-            <a href="/seed-data">/seed-data</a>
-            <a href="/login">/login</a>
-            <a href="/welcome">/welcome</a>
-            <a href="/logout">/logout</a>
+            {{#if isLoggedIn}}
+                <a href="/welcome">/welcome</a>
+                <a href="/logout">/logout</a>
+            {{else}}
+                <a href="/seed-data">/seed-data</a>
+                <a href="/login">/login</a>
+                <a href="/login-safe">/login-safe</a>
+            {{/if}}
+            <a style="background-color:#3E2F52;" href="/dom-xss">/dom-xss</a>
         </div>
 
         <div class="main">
