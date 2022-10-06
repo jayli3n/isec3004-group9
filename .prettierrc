@@ -1,5 +1,5 @@
 {
-    "semi": false,
+    "semi": true,
     "bracketSpacing": true,
     "trailingComma": "all",
     "singleQuote": false,
