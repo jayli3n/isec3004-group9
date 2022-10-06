@@ -22,7 +22,7 @@ Log in as any existing user.
 
 ### DOM-Based XSS 
 
-- Enter `"><script> window.location='http://www.evil.com' </script>` in the Text to Binary Converter.
+- Enter `asdf<script>alert("Malicious code executed!");</script>` in the Text to Binary Converter.
 
 # For developers
 
