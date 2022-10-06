@@ -45,5 +45,4 @@ install:
 
 .PHONY: dev
 dev:
-	docker-start
 	npm run dev
