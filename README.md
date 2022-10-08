@@ -13,16 +13,20 @@
 -   Run `make -i docker-build`
 -   Go to: `http://localhost:8001/`
 
-### NoSQL Injection:
+### NoSQL Injection #1:
 
 Log in as any existing user.
 
 -   Enter `james` as the username
 -   Enter `{ "$ne": "" }` as the password
 
-### DOM-Based XSS
+### DOM-Based XSS #1:
 
 -   Enter `asdf<script>alert("Malicious code executed, cookies stolen!");</script>` in the Text to Binary Converter.
+
+### DOM-Based XSS #2:
+
+-   Enter `http://localhost:8000/dom-xss2#Christine Bui"><img src="x" onerror="function f(){alert('Malicious code executed, cookies stolen!');} f()">` into address bar.
 
 # For developers
 
