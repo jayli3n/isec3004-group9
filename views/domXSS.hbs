@@ -6,49 +6,130 @@
     </head>
 
     <body>
-        <div class="main">
-            <h1>Links</h1>
-            <a href="/">/</a>
-            <a href="/seed-data">/seed-data</a>
-            {{#if isLoggedIn}}
-                <br/>
-                <a href="/welcome">/welcome</a>
-                <a href="/logout">/logout</a>
-            {{else}}
-                <br/>
-                <a style="background-color:#CF3C3C;" href="/login">/login</a>
-                <a style="background-color:#35A671;" href="/login-safe">/login-safe</a>
-            {{/if}}
-            <br/>
-            <a style="background-color:#CF3C3C;" href="/dom-xss">/dom-xss</a>
-            <a style="background-color:#35A671;" href="/dom-xss-safe">/dom-xss-safe</a>
-            <a style="background-color:#CF3C3C;" href="/dom-xss2">/dom-xss2</a>
+        <div class="nav-menu">
+            <h2 class="nav-menu-title">ISEC3004 Group 9</h1>
+
+            <div class="nav-menu-section">
+                <h3 class="nav-menu-section__title">Members</h3>
+                <ul class="nav-menu-ul">
+                    <li><p>👩‍💻 Christine Bui</p><p>[18832984]</p></li>
+                    <li><p>👨‍💻 James Li</p><p>[20226718]</p></li>
+                    <li><p>👨‍💻 Tristan Tuddenham</p><p>[19485094]</p></li>
+                    <li><p>👨‍💻 Jia Son Pow</p><p>[19617652]</p></li>
+                </ul>
+            </div>
+
+            <div class="nav-menu-section">
+                <h3 class="nav-menu-section__title">General Links</h3>
+                <ul class="nav-menu-ul">
+                    <li><p>🔥 home page</p><a href="/">/</a></li>
+                    <li><p>🔥 seed dummy data</p><a href="/seed-data">/seed-data</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-menu-section">
+                <h3 class="nav-menu-section__title">NoSQL Inject #1</h3>
+                <ul class="nav-menu-ul">
+                    {{#if isLoggedIn}}
+                        <br/>
+                        <li><p>🔵 welcome page</p><a href="/welcome">/welcome</a></li>
+                        <li><p>🔵 logout</p><a href="/logout">/logout</a></li>
+                    {{else}}
+                        <li><p>🔴 vulnerable</p><a href="/login">/login</a></li>
+                        <li><p>🟢 patched</p><a href="/login-safe">/login-safe</a></li>
+                    {{/if}}
+                </ul>
+            </div>
+
+            <div class="nav-menu-section">
+                <h3 class="nav-menu-section__title">DOM Based XSS #1</h3>
+                <ul class="nav-menu-ul">
+                    <li><p>🔴 vulnerable</p><a href="/dom-xss">/dom-xss</a></li>
+                    <li><p>🟢 patched</p><a href="/dom-xss-safe">/dom-xss-safe</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-menu-section">
+                <h3 class="nav-menu-section__title">DOM Based XSS #2</h3>
+                <ul class="nav-menu-ul">
+                    <li><p>🔴 vulnerable</p><a href="/dom-xss2">/dom-xss2</a></li>
+                    <li><p>🟢 patched</p><a href="/dom-xss2-safe">/dom-xss2-safe</a></li>
+                </ul>
+            </div>
         </div>
 
-        <div class="main">
-            <h1>Text to Binary Converter</h1>
-            <p>Enter text here:</p>
-            <form id="myForm" method="GET" action="/dom-xss">
-                <input type="text" name="textInput" />
-                <button type="submit">Submit</button>
-            </form>
+		<div class="content">
+            <div class="main">
+                <h1>Text to Binary Converter{{#if isSafe}}<span style="color: #35A671;"> (SAFE)</span>{{/if}}</h1>
+
+                {{#if isSafe}}
+                    <form id="myForm" method="GET" action="/dom-xss-safe">
+                        <p><strong>Enter text here:</strong></p>
+                        <input type="text" name="textInput" placeholder="Some text" />
+                        <button type="submit">Submit</button>
+                    </form>
+                {{else}}
+                    <form id="myForm" method="GET" action="/dom-xss">
+                        <p><strong>Enter text here:</strong></p>
+                        <input type="text" name="textInput" placeholder="Some text" />
+                        <button type="submit">Submit</button>
+                    </form>
+                {{/if}}
+            </div>
+
+            {{#if isSafe}}
+                <div class="main">
+                    <h1>Result</h1>
+                    <p><strong>Text Entered: </strong><span id="text-span"></span></p>
+                    <p><strong>Result: </strong><span id="result-span"></span></p>
+                </div>
+            {{/if}}
         </div>
     </body>
 
-    <script>
-        function stringToBinary(inStr) {
-            var result = "";
-            for (var i = 0; i < inStr.length; i++) {
-                result = result + inStr.charCodeAt(i).toString(2) + " ";
+    {{#if isSafe}}
+        <script>
+            function stringToBinary(inStr) {
+                var result = "";
+                for (var i = 0; i < inStr.length; i++) {
+                    result = result + inStr.charCodeAt(i).toString(2) + " ";
+                }
+                return result;
             }
-            return result;
-        }
-        function documentWriteSink() {
-            var textIn = new URLSearchParams(window.location.search).get("textInput");
-            var result = "";
-            result = stringToBinary(textIn);
-            document.write('<div class="main">' + "<br>" + "Text Entered: " + textIn + "<br>" + "Result: " + result + "</div>");
-        }
-        documentWriteSink();
-    </script>
+            function documentWriteSink() {
+                var textIn = new URLSearchParams(window.location.search).get("textInput");
+                var result = "";
+                result = stringToBinary(textIn);
+                document.getElementById("text-span").innerText = textIn;
+                document.getElementById("result-span").innerText = result;
+            }
+            documentWriteSink();
+        </script>
+    {{else}}
+        <script>
+            function stringToBinary(inStr) {
+                var result = "";
+                for (var i = 0; i < inStr.length; i++) {
+                    result = result + inStr.charCodeAt(i).toString(2) + " ";
+                }
+                return result;
+            }
+            function documentWriteSink() {
+                var textIn = new URLSearchParams(window.location.search).get("textInput");
+                var result = "";
+                result = stringToBinary(textIn);
+
+                document.write(`
+                    <div  id="result" class="main">
+                        <h1>Result</h1>
+                        <p><strong>Text Entered: </strong><span id="text-span">${textIn}</span></p>
+                        <p><strong>Result: </strong><span id="result-span">${result}</span></p>
+                    </div>
+                `)
+
+                const resultDivEl = document.getElementsByClassName("content")[0].appendChild(document.getElementById("result"));
+            }
+            documentWriteSink();
+        </script>
+    {{/if}}
 </html>

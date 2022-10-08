@@ -31,9 +31,9 @@ app.get("/logout", noSQL_1.logout);
 // Welcome page
 app.get("/welcome", noSQL_1.welcomePage);
 // DOM based XSS
-app.get("/dom-xss", domBasedXSS_1.domXSS);
+app.get("/dom-xss", (req, res) => (0, domBasedXSS_1.domXSS)(req, res, false));
 // DOM based XSS SAFE
-app.get("/dom-xss-safe", domBasedXSS_1.domXSSsafe);
+app.get("/dom-xss-safe", (req, res) => (0, domBasedXSS_1.domXSS)(req, res, true));
 // DOM based XSS 2
 app.get("/dom-xss2", domBasedXSS_1.domXSS2);
 // Start server

@@ -1,7 +1,7 @@
 import bodyParser from "body-parser";
 import express, { Express } from "express";
 import { SERVER_PORT } from "./src/constants";
-import { domXSS, domXSS2, domXSSsafe } from "./src/domBasedXSS";
+import { domXSS, domXSS2 } from "./src/domBasedXSS";
 import { logRequests } from "./src/middlewares";
 import { indexPage, loginPage, logout, seedData, welcomePage } from "./src/noSQL";
 
@@ -36,10 +36,10 @@ app.get("/logout", logout);
 app.get("/welcome", welcomePage);
 
 // DOM based XSS
-app.get("/dom-xss", domXSS);
+app.get("/dom-xss", (req, res) => domXSS(req, res, false));
 
 // DOM based XSS SAFE
-app.get("/dom-xss-safe", domXSSsafe);
+app.get("/dom-xss-safe", (req, res) => domXSS(req, res, true));
 
 // DOM based XSS 2
 app.get("/dom-xss2", domXSS2);

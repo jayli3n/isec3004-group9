@@ -1,12 +1,9 @@
-import { Request, Response } from "express"
+import { Request, Response } from "express";
 
-export const domXSS = async (req: Request, res: Response) => {
-    res.render("domXSS")
-}
+export const domXSS = async (req: Request, res: Response, isSafe: boolean) => {
+    res.render("domXSS", { isSafe });
+};
 
-export const domXSSsafe = async (req: Request, res: Response) => {
-    res.render("domXSS-safe")
-}
 export const domXSS2 = async (req: Request, res: Response) => {
-    res.render("domXSS2")
-}
+    res.render("domXSS2");
+};
