@@ -12,9 +12,9 @@
         </style>
     </head>
 
-    <body>
+    <body onhashchange="myFunction()" onload = "myFunction()">
         <div class="main">
-            <h1>DOM Based XSS Demo</h1>
+            <h1>DOM Based XSS Demo 2</h1>
             <a href="/">/</a>
             {{#if isLoggedIn}}
                 <a href="/welcome">/welcome</a>
@@ -30,30 +30,32 @@
         </div>
 
         <div class="main">
-            <h1>Text to Binary Converter <span style="color: #3D84DB;"> (SAFE)</span> </h1>
-            <p>Enter text here:</p>
-            <form id="myForm" method="GET" action="/dom-xss-safe">
-                <input type="text" name="textInput" />
-                <button type="submit">Submit</button>
-            </form>
+            <h1>Meet the team</h1>
+            <a href ="#Christine Bui">Christine</a>
+            <a href ="#James Li">James</a>
+            <a href ="#Tristan Tuddenham">Tristan</a>
+            <a href ="#Jia Son Pow">Jay</a>
+            <div id = "placeholder"></div>
         </div>
-
-        <div class="main">
-            <br />
-            Text Entered:
-            <span id="text-span"></span>
-            <br />
-            Result:
-            <span id="result-span"></span>
-        </div>
-
+        
     </body>
 
     <script>
-        function stringToBinary(inStr) { var result = ""; for (var i = 0; i < inStr.length; i++) { result = result + inStr.charCodeAt(i).toString(2) + " "; }
-        return result; } function documentWriteSink() { var textIn = new URLSearchParams(window.location.search).get("textInput"); var result = ""; result =
-        stringToBinary(textIn); document.getElementById("text-span").innerText = textIn; document.getElementById("result-span").innerText = result; }
-        documentWriteSink();
-
-    </script>
+        function myFunction()
+        {
+            /*http://localhost:8000/dom-xss2#Christine%20Bui%22%3E%3Cimg%20src%20=%20%22x%22%20onerror%20=%20%22function%20f(){document.write('%3Cb%3EHI%3C/b%3E');}%20f()%22%3E*/
+            var string = window.location.hash.split("#")[1];
+            string = unescape(string);
+            console.log("str = " + string);
+            var placehold = document.getElementById("placeholder");
+            switch(string)
+            {
+                case 'Christine Bui':placeholder.innerHTML = '<p><b>'+string+':</b> "Hello :) "<br><b>ID:</b> 18832984 <br><b>Course:</b> Cyber Security</p>';break;
+                case 'James Li':placeholder.innerHTML = '<p><b>'+string+':</b> "Hi :)" <br><b>ID:</b> 20226718 <br><b>Course:</b> Software Engineering</p>';break;
+                case 'Tristan Tuddenham':placeholder.innerHTML = '<p><b>'+string+':</b> "Hola :)" <br><b>ID:</b> 19485094 <br><b>Course:</b> Cyber Security </p>';break;
+                case 'Jia Son Pow':placeholder.innerHTML = '<p><b>'+string+':</b> "Hey :)"<br><b>ID:</b> 19617652 <br><b>Course:</b> Cyber Security</p>';break;
+                default: placeholder.innerHTML = '<p><b>Select a student</b><br><br><br></p>';break;
+            }
+        }
+	</script>
 </html>
