@@ -35,7 +35,7 @@
             <a href ="#James Li">James</a>
             <a href ="#Tristan Tuddenham">Tristan</a>
             <a href ="#Jia Son Pow">Jay</a>
-            <div id = "placeholder"></div>
+            <div id="placeholder"></div>
         </div>
         
     </body>
@@ -46,7 +46,6 @@
             /*http://localhost:8000/dom-xss2#Christine%20Bui%22%3E%3Cimg%20src%20=%20%22x%22%20onerror%20=%20%22function%20f(){document.write('%3Cb%3EHI%3C/b%3E');}%20f()%22%3E*/
             var string = window.location.hash.split("#")[1];
             string = unescape(string);
-            console.log("str = " + string);
             var placehold = document.getElementById("placeholder");
             switch(string)
             {

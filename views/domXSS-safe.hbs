@@ -50,10 +50,20 @@
     </body>
 
     <script>
-        function stringToBinary(inStr) { var result = ""; for (var i = 0; i < inStr.length; i++) { result = result + inStr.charCodeAt(i).toString(2) + " "; }
-        return result; } function documentWriteSink() { var textIn = new URLSearchParams(window.location.search).get("textInput"); var result = ""; result =
-        stringToBinary(textIn); document.getElementById("text-span").innerText = textIn; document.getElementById("result-span").innerText = result; }
+        function stringToBinary(inStr) {
+            var result = "";
+            for (var i = 0; i < inStr.length; i++) {
+                result = result + inStr.charCodeAt(i).toString(2) + " ";
+            }
+            return result;
+        }
+        function documentWriteSink() {
+            var textIn = new URLSearchParams(window.location.search).get("textInput");
+            var result = "";
+            result = stringToBinary(textIn);
+            document.getElementById("text-span").innerText = textIn;
+            document.getElementById("result-span").innerText = result;
+        }
         documentWriteSink();
-
     </script>
 </html>
