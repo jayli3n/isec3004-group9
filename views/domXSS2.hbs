@@ -1,29 +1,25 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href="styles.css" />
         <title>Index</title>
-        <style>
-            body { display: flex; align-items: center; justify-content: center; flex-direction: column; width: 100vw; height: 100vh; overflow: hidden;
-            font-family: Arial, Helvetica, sans-serif; background-color: #2C3333; } .main { margin: 10px; width: 600px; padding: 8px 35px; padding-bottom: 30px;
-            background-color: #E7F6F2; border-radius: 9px; } h1 { color: #2C3333; } .question { display: flex; flex-direction: column; margin-bottom: 12px; }
-            input { margin: 3px 0; padding: 6px; } ul {list-style: none; list-style-position:inside; padding: 0;} li { list-style-type: none; background-color:
-            #A5C9CA; margin-bottom: 16px; padding: 16px 30px; border-radius: 8px; } a { display: inline-block;font-weight: bold; align-self: flex-start; margin:
-            4px 0; background-color: #395B64; color: #FFFFFF; padding: 8px 12px; border-radius: 4px; border: none; cursor: pointer; text-decoration: none;}
-        </style>
     </head>
 
     <body onhashchange="innerHTMLSink()" onload = "innerHTMLSink()">
         <div class="main">
-            <h1>DOM Based XSS Demo 2</h1>
+            <h1>Links</h1>
             <a href="/">/</a>
+            <a href="/seed-data">/seed-data</a>
             {{#if isLoggedIn}}
+                <br/>
                 <a href="/welcome">/welcome</a>
                 <a href="/logout">/logout</a>
             {{else}}
-                <a href="/seed-data">/seed-data</a>
+                <br/>
                 <a style="background-color:#CF3C3C;" href="/login">/login</a>
                 <a style="background-color:#35A671;" href="/login-safe">/login-safe</a>
             {{/if}}
+            <br/>
             <a style="background-color:#CF3C3C;" href="/dom-xss">/dom-xss</a>
             <a style="background-color:#35A671;" href="/dom-xss-safe">/dom-xss-safe</a>
             <a style="background-color:#CF3C3C;" href="/dom-xss2">/dom-xss2</a>
@@ -36,7 +32,7 @@
             <a href ="#James Li">James</a>
             <a href ="#Tristan Tuddenham">Tristan</a>
             <a href ="#Jia Son Pow">Jay</a>
-            <div id = "placeholder"></div>
+            <div id="placeholder"></div>
         </div>
         
     </body>
@@ -47,15 +43,25 @@
             /*http://localhost:8000/dom-xss2#Christine%20Bui%22%3E%3Cimg%20src%20=%20%22x%22%20onerror%20=%20%22function%20f(){document.write('%3Cb%3EHI%3C/b%3E');}%20f()%22%3E*/
             var string = window.location.hash.split("#")[1];
             string = unescape(string);
-            console.log("str = " + string);
-            var placehold = document.getElementById("placeholder");
+            var placeholder = document.getElementById("placeholder");
+
             switch(string)
             {
-                case 'Christine Bui':placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hello :)"</i><br><b>ID:</b><i> 18832984</i><br><b>Course:</b><i> Cyber Security</i></p>';break;
-                case 'James Li':placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hi :)"</i> <br><b>ID:</b><i> 20226718</i><br><b>Course:</b><i> Software Engineering</i></p>';break;
-                case 'Tristan Tuddenham':placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hola :)"</i><br><b>ID:</b><i> 19485094</i><br><b>Course:</b><i> Cyber Security</i></p>';break;
-                case 'Jia Son Pow':placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hey :)"</i><br><b>ID:</b><i> 19617652</i><br><b>Course:</b><i> Cyber Security</i></p>';break;
-                default: placeholder.innerHTML = '<p><b>'+string+' does not exist. Select a student</b><br><br><br></p>';break;
+                case 'Christine Bui':
+                    placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hello :)"</i><br><b>ID:</b><i> 18832984</i><br><b>Course:</b><i> Cyber Security</i></p>';
+                    break;
+                case 'James Li':
+                    placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hi :)"</i> <br><b>ID:</b><i> 20226718</i><br><b>Course:</b><i> Software Engineering</i></p>';
+                    break;
+                case 'Tristan Tuddenham':
+                    placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hola :)"</i><br><b>ID:</b><i> 19485094</i><br><b>Course:</b><i> Cyber Security</i></p>';
+                    break;
+                case 'Jia Son Pow':
+                    placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hey :)"</i><br><b>ID:</b><i> 19617652</i><br><b>Course:</b><i> Cyber Security</i></p>';
+                    break;
+                default:
+                    placeholder.innerHTML = '<p><b>'+string+' does not exist. Select a student</b><br><br><br></p>';
+                    break;
             }
         }
 	</script>
