@@ -65,6 +65,7 @@ li {
     min-width: 24rem;
     background-color: #25123b;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    overflow-y: auto;
 }
 
 .nav-menu-title {
