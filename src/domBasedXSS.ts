@@ -10,3 +10,6 @@ export const domXSSsafe = async (req: Request, res: Response) => {
 export const domXSS2 = async (req: Request, res: Response) => {
     res.render("domXSS2")
 }
+export const domXSS2safe = async (req: Request, res: Response) => {
+    res.render("domXSS2-safe")
+}
