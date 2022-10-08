@@ -46,14 +46,25 @@
             /*http://localhost:8000/dom-xss2#Christine%20Bui%22%3E%3Cimg%20src%20=%20%22x%22%20onerror%20=%20%22function%20f(){document.write('%3Cb%3EHI%3C/b%3E');}%20f()%22%3E*/
             var string = window.location.hash.split("#")[1];
             string = unescape(string);
-            var placehold = document.getElementById("placeholder");
+            var placeholder = document.getElementById("placeholder");
+            
             switch(string)
             {
-                case 'Christine Bui':placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hello :)"</i><br><b>ID:</b><i> 18832984</i><br><b>Course:</b><i> Cyber Security</i></p>';break;
-                case 'James Li':placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hi :)"</i> <br><b>ID:</b><i> 20226718</i><br><b>Course:</b><i> Software Engineering</i></p>';break;
-                case 'Tristan Tuddenham':placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hola :)"</i><br><b>ID:</b><i> 19485094</i><br><b>Course:</b><i> Cyber Security</i></p>';break;
-                case 'Jia Son Pow':placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hey :)"</i><br><b>ID:</b><i> 19617652</i><br><b>Course:</b><i> Cyber Security</i></p>';break;
-                default: placeholder.innerHTML = '<p><b>'+string+' does not exist. Select a student</b><br><br><br></p>';break;
+                case 'Christine Bui':
+                    placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hello :)"</i><br><b>ID:</b><i> 18832984</i><br><b>Course:</b><i> Cyber Security</i></p>';
+                    break;
+                case 'James Li':
+                    placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hi :)"</i> <br><b>ID:</b><i> 20226718</i><br><b>Course:</b><i> Software Engineering</i></p>';
+                    break;
+                case 'Tristan Tuddenham':
+                    placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hola :)"</i><br><b>ID:</b><i> 19485094</i><br><b>Course:</b><i> Cyber Security</i></p>';
+                    break;
+                case 'Jia Son Pow':
+                    placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hey :)"</i><br><b>ID:</b><i> 19617652</i><br><b>Course:</b><i> Cyber Security</i></p>';
+                    break;
+                default:
+                    placeholder.innerHTML = '<p><b>'+string+' does not exist. Select a student</b><br><br><br></p>';
+                    break;
             }
         }
 	</script>
