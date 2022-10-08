@@ -16,14 +16,17 @@
         <div class="main">
             <h1>DOM Based XSS Demo</h1>
             <a href="/">/</a>
+            <a href="/seed-data">/seed-data</a>
             {{#if isLoggedIn}}
+                <br/>
                 <a href="/welcome">/welcome</a>
                 <a href="/logout">/logout</a>
             {{else}}
-                <a href="/seed-data">/seed-data</a>
+                <br/>
                 <a style="background-color:#CF3C3C;" href="/login">/login</a>
                 <a style="background-color:#35A671;" href="/login-safe">/login-safe</a>
             {{/if}}
+            <br/>
             <a style="background-color:#CF3C3C;" href="/dom-xss">/dom-xss</a>
             <a style="background-color:#35A671;" href="/dom-xss-safe">/dom-xss-safe</a>
             <a style="background-color:#CF3C3C;" href="/dom-xss2">/dom-xss2</a>
