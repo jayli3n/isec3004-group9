@@ -14,7 +14,7 @@
 
     <body onhashchange="innerHTMLSink()" onload = "innerHTMLSink()">
         <div class="main">
-            <h1>DOM Based XSS Demo 2</h1>
+            <h1>DOM Based XSS Demo 2 SAFE</h1>
             <a href="/">/</a>
             {{#if isLoggedIn}}
                 <a href="/welcome">/welcome</a>
@@ -32,30 +32,95 @@
 
         <div class="main">
             <h1>Meet the team</h1>
-            <a href ="#Christine Bui">Christine</a>
-            <a href ="#James Li">James</a>
-            <a href ="#Tristan Tuddenham">Tristan</a>
-            <a href ="#Jia Son Pow">Jay</a>
-            <div id = "placeholder"></div>
+            <!--CHANGE hash should have no spaces-->
+            <a href ="#Christine-Bui">Christine</a>
+            <a href ="#James-Li">James</a>
+            <a href ="#Tristan-Tuddenham">Tristan</a>
+            <a href ="#Jia-Son-Pow">Jay</a>
+            
+            <!--ADDED more placeholders since direct HTML can no longer be written to document-->
+            <br>
+            <b><p id = "placeholder"></p></b>
+            <b><span id = "name"> </span></b> <i><span id = "msg"> </span></i>
+            <br>
+            <b><span id = "I">ID: </span></b> <i><span id = "id"> </span></i>
+            <br>
+            <b><span id = "C">Course: </span></b> <i><span id = "course"> </span></i>
         </div>
-        
-    </body>
+    </body>       
 
     <script>
+        //ADD function to parse URL hash string -> name string (no direct write to document)
+        function nameString(inStr){
+            var returnStr = "";
+            var nameArr = inStr.split("-");
+            for( var i=0; i<(nameArr.length)-1;i++)
+            {
+                returnStr += nameArr[i]+" ";
+            }
+            returnStr += nameArr[(nameArr.length)-1] + ":";
+            return returnStr;
+        }
+       //additional functions for setting innerText 
+       function reset(placeholder,nameHolder,msgHolder,idHolder,courseHolder){
+            placeholder.innerText = " ";
+            nameHolder.innerText = " ";
+            msgHolder.innerText = " ";
+            idHolder.innerText = " ";
+            courseHolder.innerText = " ";
+            document.getElementById("I").setAttribute("style","display:inline");
+            document.getElementById("C").setAttribute("style","display:inline");
+       }
         function innerHTMLSink()
         {
             /*http://localhost:8000/dom-xss2#Christine%20Bui%22%3E%3Cimg%20src%20=%20%22x%22%20onerror%20=%20%22function%20f(){document.write('%3Cb%3EHI%3C/b%3E');}%20f()%22%3E*/
             var string = window.location.hash.split("#")[1];
-            string = unescape(string);
+            //string = unescape(string);    //***REMOVED unescape() - Prevents unsanitised inputs ***
             console.log("str = " + string);
-            var placehold = document.getElementById("placeholder");
+            //REPLACE placeholder with indiviual elements: can't write html into placeholder anymore
+            var placehold = document.getElementById("placeholder");//only for default
+            var nameHolder = document.getElementById("name");
+            var msgHolder = document.getElementById("msg");
+            var idHolder = document.getElementById("id");
+            var courseHolder = document.getElementById("course");
             switch(string)
             {
-                case 'Christine Bui':placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hello :)"</i><br><b>ID:</b><i> 18832984</i><br><b>Course:</b><i> Cyber Security</i></p>';break;
-                case 'James Li':placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hi :)"</i> <br><b>ID:</b><i> 20226718</i><br><b>Course:</b><i> Software Engineering</i></p>';break;
-                case 'Tristan Tuddenham':placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hola :)"</i><br><b>ID:</b><i> 19485094</i><br><b>Course:</b><i> Cyber Security</i></p>';break;
-                case 'Jia Son Pow':placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hey :)"</i><br><b>ID:</b><i> 19617652</i><br><b>Course:</b><i> Cyber Security</i></p>';break;
-                default: placeholder.innerHTML = '<p><b>'+string+' does not exist. Select a student</b><br><br><br></p>';break;
+                //REPLACE all innerHTML with innerText
+                //html style is now separate from text
+                case 'Christine-Bui':
+                    reset(placeholder,nameHolder,msgHolder,idHolder,courseHolder);
+                    nameHolder.innerText = nameString(string);
+                    msgHolder.innerText = "\"Hello :)\"";
+                    idHolder.innerText = "18832974";
+                    courseHolder.innerText = "Cyber Security";
+                    break;
+                case 'James-Li':
+                    reset(placeholder,nameHolder,msgHolder,idHolder,courseHolder);
+                    nameHolder.innerText = nameString(string);
+                    msgHolder.innerText = "\"Hi :)\"";
+                    idHolder.innerText = "20226718";
+                    courseHolder.innerText = "Software Engineering";
+                    break;
+                case 'Tristan-Tuddenham':
+                    reset(placeholder,nameHolder,msgHolder,idHolder,courseHolder);
+                    nameHolder.innerText = nameString(string);
+                    msgHolder.innerText = "\"Hola :)\"";
+                    idHolder.innerText = "19485094";
+                    courseHolder.innerText = "Cyber Security";
+                    break;
+                case 'Jia-Son-Pow':
+                    reset(placeholder,nameHolder,msgHolder,idHolder,courseHolder);
+                    nameHolder.innerText = nameString(string);
+                    msgHolder.innerText = "\"Hey :)\"";
+                    idHolder.innerText = "19617652";
+                    courseHolder.innerText = "Cyber Security";
+                    break;
+                default: 
+                    reset(placeholder,nameHolder,msgHolder,idHolder,courseHolder);
+                    placeholder.innerText = string+' does not exist. Select a student ';
+                    document.getElementById("I").setAttribute("style","display:none");
+                    document.getElementById("C").setAttribute("style","display:none");
+                    break;
             }
         }
 	</script>
