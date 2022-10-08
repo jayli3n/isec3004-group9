@@ -127,6 +127,7 @@ form {
 input {
     margin: 3px 0;
     padding: 0.4rem 0.8rem;
+    border-radius: 1rem;
 }
 
 .error-message {
