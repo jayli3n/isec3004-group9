@@ -82,7 +82,7 @@ li {
 }
 
 .nav-menu-section__title {
-    letter-spacing: 1px;
+    letter-spacing: 0.6px;
     margin-bottom: 0.5rem;
     text-transform: uppercase;
 }
@@ -141,4 +141,17 @@ input {
 
 .user-posts li:not(:last-child) {
     margin-bottom: 0.8rem;
+}
+
+.dom-xss-2 a {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.dom-xss-2 {
+    margin-top: 0.3rem;
+}
+
+#dom-xss-2-placeholder {
+    margin-top: 1rem;
 }

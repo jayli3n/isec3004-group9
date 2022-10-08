@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8" />
 		<link rel="stylesheet" type="text/css" href="styles.css" />
-        <title>Index</title>
+        <title>Dom Based XSS #2</title>
     </head>
 
     <body onhashchange="innerHTMLSink()" onload = "innerHTMLSink()">
@@ -59,42 +59,151 @@
         </div>
 
 		<div class="content">
-            <h1>Meet the team</h1>
-            <a href ="#Christine Bui">Christine</a>
-            <a href ="#James Li">James</a>
-            <a href ="#Tristan Tuddenham">Tristan</a>
-            <a href ="#Jia Son Pow">Jay</a>
-            <div id="placeholder"></div>
+            <div class="main dom-xss-2">
+                <h1>Meet the team{{#if isSafe}}<span style="color: #35A671;"> (SAFE)</span>{{/if}}</h1>
+
+                <div class="dom-xss-2">
+                    <a href ="#Christine Bui">Christine</a>
+                    <a href ="#James Li">James</a>
+                    <a href ="#Tristan Tuddenham">Tristan</a>
+                    <a href ="#Jia Son Pow">Jay</a>
+
+                    <div id="dom-xss-2-placeholder">
+                        {{#if isSafe}}
+                            <p class="dom-xss-2-result"><strong>Name: </strong><i id="student-name"></i></p>
+                            <p class="dom-xss-2-result"><strong>ID: </strong><i id="student-id"></i></p>
+                            <p class="dom-xss-2-result"><strong>Course: </strong><i id="student-course"></i></p>
+                            <p class="dom-xss-2-error"><strong id="error-message" class="error-message"></strong></p>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
         </div>
-        
     </body>
 
-    <script>
-        function innerHTMLSink()
-        {
-            /*http://localhost:8000/dom-xss2#Christine%20Bui%22%3E%3Cimg%20src%20=%20%22x%22%20onerror%20=%20%22function%20f(){document.write('%3Cb%3EHI%3C/b%3E');}%20f()%22%3E*/
-            var string = window.location.hash.split("#")[1];
-            string = unescape(string);
-            var placeholder = document.getElementById("placeholder");
+    {{!-- /*http://localhost:8000/dom-xss2#Christine%20Bui%22%3E%3Cimg%20src%20=%20%22x%22%20onerror%20=%20%22function%20f(){document.write('%3Cb%3EHI%3C/b%3E');}%20f()%22%3E*/ --}}
 
-            switch(string)
-            {
-                case 'Christine Bui':
-                    placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hello :)"</i><br><b>ID:</b><i> 18832984</i><br><b>Course:</b><i> Cyber Security</i></p>';
-                    break;
-                case 'James Li':
-                    placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hi :)"</i> <br><b>ID:</b><i> 20226718</i><br><b>Course:</b><i> Software Engineering</i></p>';
-                    break;
-                case 'Tristan Tuddenham':
-                    placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hola :)"</i><br><b>ID:</b><i> 19485094</i><br><b>Course:</b><i> Cyber Security</i></p>';
-                    break;
-                case 'Jia Son Pow':
-                    placeholder.innerHTML = '<p><b>'+string+':</b><i> "Hey :)"</i><br><b>ID:</b><i> 19617652</i><br><b>Course:</b><i> Cyber Security</i></p>';
-                    break;
-                default:
-                    placeholder.innerHTML = '<p><b>'+string+' does not exist. Select a student</b><br><br><br></p>';
-                    break;
+    {{#if isSafe}}
+        <script>
+            var resultEls = document.getElementsByClassName("dom-xss-2-result")
+            var errorEls = document.getElementsByClassName("dom-xss-2-error")
+
+            var studentNameEl = document.getElementById("student-name");
+            var studentIDEl = document.getElementById("student-id");
+            var studentCourseEl = document.getElementById("student-course");
+            var errorMessageEl = document.getElementById("error-message");
+
+            // Additional functions for setting innerText 
+            function onlyShowResultEls(){
+                for (var i = 0; i < resultEls.length; i++) {
+                    resultEls[i].style.display = 'block'
+                }
+                for (var i = 0; i < errorEls.length; i++) {
+                    errorEls[i].style.display = 'none'
+                }
             }
-        }
-	</script>
+
+            function onlyShowErrorEls() {
+                for (var i = 0; i < resultEls.length; i++) {
+                    resultEls[i].style.display = 'none'
+                }
+                
+                for (var i = 0; i < errorEls.length; i++) {
+                    errorEls[i].style.display = 'block'
+                }
+            }
+            
+            function innerHTMLSink()
+            {
+                var stringText = window.location.hash.split("#")[1];
+                stringText = unescape(stringText);
+
+                switch(stringText)
+                {
+                    // Replace all innerHTML with innerText
+                    // HTML style is now separate from text
+                    case 'Christine Bui':
+                        onlyShowResultEls();
+                        studentNameEl.innerText = stringText;
+                        studentIDEl.innerText = "18832974";
+                        studentCourseEl.innerText = "Cyber Security";
+                        break;
+                    case 'James Li':
+                        onlyShowResultEls();
+                        studentNameEl.innerText = stringText;
+                        studentIDEl.innerText = "20226718";
+                        studentCourseEl.innerText = "Software Engineering";
+                        break;
+                    case 'Tristan Tuddenham':
+                        onlyShowResultEls();
+                        studentNameEl.innerText = stringText;
+                        studentIDEl.innerText = "19485094";
+                        studentCourseEl.innerText = "Cyber Security";
+                        break;
+                    case 'Jia Son Pow':
+                        onlyShowResultEls();
+                        studentNameEl.innerText = stringText;
+                        studentIDEl.innerText = "19617652";
+                        studentCourseEl.innerText = "Cyber Security";
+                        break;
+                    default: 
+                        onlyShowErrorEls();
+                        errorMessageEl.innerText = `Select a student from above. ${stringText} does not exist.`;
+                        break;
+                }
+            }
+        </script>
+    {{else}}
+        <script>
+            function innerHTMLSink()
+            {
+                var stringText = window.location.hash.split("#")[1];
+                stringText = unescape(stringText);
+
+                var placeholder = document.getElementById("dom-xss-2-placeholder");
+
+                switch(stringText)
+                {
+                    case 'Christine Bui':
+                        placeholder.innerHTML = `
+                            <p><strong>Name: </strong><i>${stringText}</i></p>
+                            <p><strong>ID: </strong><i>18832984</i></p>
+                            <p><strong>Course: </strong><i>Cyber Security</i></p>
+                        `
+                        break;
+                    case 'James Li':
+                        placeholder.innerHTML = `
+                            <p><strong>Name: </strong><i>${stringText}</i></p>
+                            <p><strong>ID: </strong><i>20226718</i></p>
+                            <p><strong>Course: </strong><i>Software Engineering</i></p>
+                        `
+                        break;
+                    case 'Tristan Tuddenham':
+                        placeholder.innerHTML = `
+                            <p><strong>Name: </strong><i>${stringText}</i></p>
+                            <p><strong>ID: </strong><i>19485094</i></p>
+                            <p><strong>Course: </strong><i>Cyber Security</i></p>
+                        `
+                        break;
+                    case 'Jia Son Pow':
+                        placeholder.innerHTML = `
+                            <p><strong>Name: </strong><i>${stringText}</i></p>
+                            <p><strong>ID: </strong><i>19617652</i></p>
+                            <p><strong>Course: </strong><i>Cyber Security</i></p>
+                        `
+                        break;
+                    default:
+                        placeholder.innerHTML = `
+                            <p>
+                                <strong id="error-message" class="error-message">
+                                    Select a student from above.
+                                    ${stringText} does not exist.
+                                </strong>
+                            </p>
+                        `;
+                        break;
+                }
+            }
+        </script>
+    {{/if}}
 </html>

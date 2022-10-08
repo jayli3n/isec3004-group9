@@ -35,7 +35,9 @@ app.get("/dom-xss", (req, res) => (0, domBasedXSS_1.domXSS)(req, res, false));
 // DOM based XSS SAFE
 app.get("/dom-xss-safe", (req, res) => (0, domBasedXSS_1.domXSS)(req, res, true));
 // DOM based XSS 2
-app.get("/dom-xss2", domBasedXSS_1.domXSS2);
+app.get("/dom-xss2", (req, res) => (0, domBasedXSS_1.domXSS2)(req, res, false));
+// DOM based XSS 2 SAFE
+app.get("/dom-xss2-safe", (req, res) => (0, domBasedXSS_1.domXSS2)(req, res, true));
 // Start server
 app.listen(constants_1.SERVER_PORT, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${constants_1.SERVER_PORT}`);

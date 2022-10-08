@@ -42,7 +42,10 @@ app.get("/dom-xss", (req, res) => domXSS(req, res, false));
 app.get("/dom-xss-safe", (req, res) => domXSS(req, res, true));
 
 // DOM based XSS 2
-app.get("/dom-xss2", domXSS2);
+app.get("/dom-xss2", (req, res) => domXSS2(req, res, false));
+
+// DOM based XSS 2 SAFE
+app.get("/dom-xss2-safe", (req, res) => domXSS2(req, res, true));
 
 // Start server
 app.listen(SERVER_PORT, () => {
