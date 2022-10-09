@@ -5,6 +5,10 @@
 -   NoSQL Injection
 -   DOM Based XSS
 
+![image](https://user-images.githubusercontent.com/44139980/194742763-326707fd-b4b5-4204-ad38-fd8070b988ae.png)
+
+![image](https://user-images.githubusercontent.com/44139980/194742786-406554e6-a6b4-4512-9fdb-292100b918cb.png)
+
 # For lecturer / testing
 
 ### ✅ Build:
