@@ -31,7 +31,7 @@ The password is passed into MongoDb as a JSON object, where the criteria (passwo
 
 ##### <u>Fix:</u>
 
-We perform a basic validation check on any user input before passing ~~~~~~into~~~~~~ the database, if the user input is NOT a `string`, i.e. a JSON object, we return an error.
+We perform a basic validation check on any user input before passing it into the database, if the user input is NOT a `string`, i.e. a JSON object, we return an error.
 
 ![image](https://user-images.githubusercontent.com/44139980/194741238-f26250cf-af51-48c4-ba48-8609113ca76c.png)
 
