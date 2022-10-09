@@ -143,19 +143,41 @@ export const todoPage = async (req: Request, res: Response, isSafe: boolean) => 
         _id: ObjectId;
     }
     try {
-        const todoItems = (await db
-            .collection("todoItems")
-            .find({ $where: `this.title.toLowerCase().includes('${req.query.search || ""}') && this.username == '${user.username}'` })
-            .toArray()) as TodoItemDoc[];
+        if (isSafe) {
+            const todoItems = (await db
+                .collection("todoItems")
+                .find({ username: user.username, title: { $regex: req.query.search || "", $options: "i" } })
+                .toArray()) as TodoItemDoc[];
 
+            // Render the page
+            res.render("todoList", {
+                username: user.username,
+                todoItems,
+                isLoggedIn: !!loggedInUserID,
+                isSafe,
+            });
+        } else {
+            const todoItems = (await db
+                .collection("todoItems")
+                .find({ $where: `this.title.toLowerCase().includes('${req.query.search || ""}') && this.username == '${user.username}'` })
+                .toArray()) as TodoItemDoc[];
+
+            // Render the page
+            res.render("todoList", {
+                username: user.username,
+                todoItems,
+                isLoggedIn: !!loggedInUserID,
+                isSafe,
+            });
+        }
+    } catch (err) {
+        console.log(err);
         // Render the page
         res.render("todoList", {
             username: user.username,
-            todoItems,
+            todoItems: [],
             isLoggedIn: !!loggedInUserID,
             isSafe,
         });
-    } catch (err) {
-        console.log(err);
     }
 };
