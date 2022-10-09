@@ -29,7 +29,7 @@ app.get("/login-safe", (req, res) => (0, noSQL_1.loginPage)(req, res, true));
 // Logout
 app.get("/logout", noSQL_1.logout);
 // To do list page
-app.get("/todos", noSQL_1.todoPage);
+app.get("/todo-list", noSQL_1.todoPage);
 // DOM based XSS
 app.get("/dom-xss", (req, res) => (0, domBasedXSS_1.domXSS)(req, res, false));
 // DOM based XSS SAFE
