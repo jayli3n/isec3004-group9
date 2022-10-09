@@ -78,8 +78,8 @@
 
                 <form action = "/todo-list" method="get">
                     <div class = "question">
-                        <b><label for="todoItemTitle">Todo title:</label></b>
-                        <input type="text" name="todoItemTitle" placeholder="Title"></input>
+                        <b><label for="newItem">Todo title:</label></b>
+                        <input type="text" name="newItem" placeholder="Title"></input>
                     </div>
                     <button type="submit">SUBMIT</button>
                 </form>
@@ -90,9 +90,9 @@
 
                 <form action = "/todo-list" method="get">
                     <div class = "question">
-                        <b><label for="todoItemTitle">Search for a todo item{{#if isSafe}}<span style="color: #35A671;"> (SAFE)</span>{{/if}}:</label></b>
+                        <b><label for="search">Search for a todo item{{#if isSafe}}<span style="color: #35A671;"> (SAFE)</span>{{/if}}:</label></b>
                         <div class="todo-search">
-                            <input type="text" name="todoItemTitle" placeholder="Keyword..."></input>
+                            <input type="text" name="search" placeholder="Keyword..."></input>
                             <button type="submit">SEARCH</button>
                         </div>
                     </div>

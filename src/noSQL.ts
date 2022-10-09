@@ -103,7 +103,6 @@ export const logout = async (req: Request, res: Response) => {
 // Returns the Todos page
 export const todoPage = async (req: Request, res: Response, isSafe: boolean) => {
     // If user is not logged in, redirection to login page
-
     if (!loggedInUserID) {
         res.redirect("/login");
         return;
@@ -114,6 +113,7 @@ export const todoPage = async (req: Request, res: Response, isSafe: boolean) => 
         res.status(500).send("Server failed to initialize db.");
         return;
     }
+
     // Get the user from db
     interface UserDoc extends User {
         _id: ObjectId;
@@ -134,9 +134,9 @@ export const todoPage = async (req: Request, res: Response, isSafe: boolean) => 
     const todoItems = (await db.collection("todoItems").find({ username: user.username }).toArray()) as TodoItemDoc[];
     // Insert new todoItem works but gives error:
     // Cannot send headers after they are send to the client
-    if (req.query.todoItemTitle) {
+    if (req.query.newItem) {
         try {
-            db.collection("todoItems").insertOne({ username: user.username, title: req.query.todoItemTitle });
+            db.collection("todoItems").insertOne({ username: user.username, title: req.query.newItem });
             res.redirect("/todo-list"); //called res.redirect twice
         } catch {
             console.log("Failed to insert.");
