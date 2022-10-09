@@ -21,7 +21,13 @@ Log in as any existing user.
 
 ##### <u>Problem:</u>
 
-The server will interpret that as `db.collection("users").findOne({ username: 'james', password: { '$ne': '' })`; the password is passed into MongoDb as a JSON object, where the criteria (password not equal to nothing) will always evaluate to `true`.
+The server will interpret that as
+
+```Javascript
+db.collection("users").findOne({ username: 'james', password: { '$ne': '' })
+```
+
+The password is passed into MongoDb as a JSON object, where the criteria (password not equal to nothing) will always evaluate to `true`.
 
 ##### <u>Fix:</u>
 
@@ -41,7 +47,13 @@ The code uses the `$where` query operator with un-validated user input, it is su
 
 ![image](https://user-images.githubusercontent.com/44139980/194741293-74fddb38-3758-498a-839f-f75c391f0ff2.png)
 
-The server will interpret the user input as `this.title.toLowerCase().includes('') || ('a'=='a) //') && this.username == 'james'` where the check for the username is commented out and doesn't run, which causes the query to return every user's private todo list.
+The server will interpret the user input as
+
+```Javascript
+this.title.toLowerCase().includes('') || ('a'=='a) //') && this.username == 'james'
+```
+
+where the check for the username is commented out and doesn't run, which causes the query to return every user's private todo list.
 
 ##### <u>Fix:</u>
 
