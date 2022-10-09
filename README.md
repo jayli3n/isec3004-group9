@@ -51,13 +51,13 @@ Instead of using the `$where` query operator, we use a `$regex` search which doe
 
 ### 1️⃣ DOM-Based XSS #1:
 
-Execute arbitrary Javascript code on user's browser.
+Execute any arbitrary Javascript code on user's browser.
 
 -   Enter `asdf<script>alert("Malicious code executed, cookies stolen!");</script>` in the Text to Binary Converter.
 
 ##### Problem:
 
-The code uses `document.write(...)` API to write elements into the DOM. This method is strongly discouraged as it evaluates an input string into HTML markup and inserts HTML elements into the DOM. Since the input string comes from the text input field, an attacker can include a `<script>` tag into the input string and perform arbitrary Javascript code.
+The code uses `document.write(...)` API to write elements into the DOM. This method is strongly discouraged as it evaluates an input string into HTML markup and inserts HTML elements into the DOM. Since the input string comes from the text input field, an attacker can include a `<script>` tag into the input string and perform any arbitrary Javascript code.
 
 ![image](https://user-images.githubusercontent.com/44139980/194741528-17eb8a81-90d2-4716-aef7-1f82e89072c4.png)
 
@@ -69,13 +69,21 @@ Instead of using the `document.write(...)` API, we use a much safer method `elem
 
 ### 2️⃣ DOM-Based XSS #2:
 
-Execute arbitrary Javascript code on user's browser.
+Execute any arbitrary Javascript code on user's browser.
 
 -   Enter `http://localhost:8000/dom-xss2#Christine Bui"><img src="x" onerror="function f(){alert('Malicious code executed, cookies stolen!');} f()">` into the address bar.
 
 ##### Problem:
 
+The code uses `element.innerHTML = "..."` to inject an input string into an element, the risk of this is that the input string can be evaluated into HTML elements. An attacker can include `<script>` tags or an `<img>` tag with Javascript code attacked to it to execute any arbitrary Javascript code.
+
+![image](https://user-images.githubusercontent.com/44139980/194741790-dc1553f6-7f91-4c2f-b733-d23eda47d9e1.png)
+
 ##### Fix:
+
+Instead of using the `element.innerHTML = "..."`, we use a much safer method `element.textContent = "..."` to inject user input into the DOM, the input string will not evaluate into a HTML element, it will remain as a string.
+
+![image](https://user-images.githubusercontent.com/44139980/194741942-345497d4-f021-4d22-bec2-a1f01d78b6bf.png)
 
 # For developers
 

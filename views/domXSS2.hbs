@@ -107,7 +107,7 @@
             var studentCourseEl = document.getElementById("student-course");
             var errorMessageEl = document.getElementById("error-message");
 
-            // Additional functions for setting innerText 
+            // Additional functions for setting textContent 
             function onlyShowResultEls(){
                 for (var i = 0; i < resultEls.length; i++) {
                     resultEls[i].style.display = 'block'
@@ -134,35 +134,35 @@
 
                 switch(stringText)
                 {
-                    // Replace all innerHTML with innerText
+                    // Replace all innerHTML with textContent
                     // HTML style is now separate from text
                     case 'Christine Bui':
                         onlyShowResultEls();
-                        studentNameEl.innerText = stringText;
-                        studentIDEl.innerText = "18832974";
-                        studentCourseEl.innerText = "Cyber Security";
+                        studentNameEl.textContent = stringText;
+                        studentIDEl.textContent = "18832974";
+                        studentCourseEl.textContent = "Cyber Security";
                         break;
                     case 'James Li':
                         onlyShowResultEls();
-                        studentNameEl.innerText = stringText;
-                        studentIDEl.innerText = "20226718";
-                        studentCourseEl.innerText = "Software Engineering";
+                        studentNameEl.textContent = stringText;
+                        studentIDEl.textContent = "20226718";
+                        studentCourseEl.textContent = "Software Engineering";
                         break;
                     case 'Tristan Tuddenham':
                         onlyShowResultEls();
-                        studentNameEl.innerText = stringText;
-                        studentIDEl.innerText = "19485094";
-                        studentCourseEl.innerText = "Cyber Security";
+                        studentNameEl.textContent = stringText;
+                        studentIDEl.textContent = "19485094";
+                        studentCourseEl.textContent = "Cyber Security";
                         break;
                     case 'Jia Son Pow':
                         onlyShowResultEls();
-                        studentNameEl.innerText = stringText;
-                        studentIDEl.innerText = "19617652";
-                        studentCourseEl.innerText = "Cyber Security";
+                        studentNameEl.textContent = stringText;
+                        studentIDEl.textContent = "19617652";
+                        studentCourseEl.textContent = "Cyber Security";
                         break;
                     default: 
                         onlyShowErrorEls();
-                        errorMessageEl.innerText = `Select a student from above. ${stringText} does not exist.`;
+                        errorMessageEl.textContent = `Select a student from above. ${stringText} does not exist.`;
                         break;
                 }
             }
