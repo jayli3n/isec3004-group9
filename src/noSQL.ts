@@ -138,19 +138,14 @@ export const todoPage = async (req: Request, res: Response, isSafe: boolean) => 
         return;
     }
 
-    // Get the search string from url query
-    // let search = ""
-    // if (req.query.search) {
-
-    // }
-
     // Get user todoItems
     interface TodoItemDoc extends TodoItem {
         _id: ObjectId;
     }
+    console.log(`this.title.toLowerCase().includes('${req.query.search?.toString().toLowerCase()}') && this.username == '${user.username}'`);
     const todoItems = (await db
         .collection("todoItems")
-        .find({ $where: `this.username == '${user.username}'` })
+        .find({ $where: `this.title.toLowerCase().includes('${req.query.search?.toString().toLowerCase() || ""}') && this.username == '${user.username}'` })
         .toArray()) as TodoItemDoc[];
 
     // Render the page
