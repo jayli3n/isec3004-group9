@@ -1,14 +1,14 @@
-export const SERVER_PORT = 8000
-export const DB_URL = `mongodb://${process.env.DB_HOSTNAME || "localhost"}:27017/isec3004`
+export const SERVER_PORT = 8000;
+export const DB_URL = `mongodb://${process.env.DB_HOSTNAME || "localhost"}:27017/isec3004`;
 
 export interface User {
-    username: string
-    password: string
+    username: string;
+    password: string;
 }
 
-export interface Post {
-    username: string
-    title: string
+export interface TodoItem {
+    username: string;
+    title: string;
 }
 
 export const fakeUsers: User[] = [
@@ -28,43 +28,39 @@ export const fakeUsers: User[] = [
         username: "james",
         password: "a1234",
     },
-]
+];
 
-export const fakePosts: Post[] = [
+export const fakeTodoItems: TodoItem[] = [
     {
         username: "christine",
-        title: "I ate fish today.",
+        title: "Do ISEC3004 homework.",
     },
     {
         username: "christine",
-        title: "I ate an apple today.",
-    },
-    {
-        username: "christine",
-        title: "I ate a cake today.",
+        title: "Buy ice-cream.",
     },
     {
         username: "jay",
-        title: "I ate chicken today.",
+        title: "Do ISEC3004 homework.",
     },
     {
         username: "jay",
-        title: "I ate steak today.",
+        title: "Buy ice-cream.",
     },
     {
         username: "tristan",
-        title: "I ate nothing today.",
+        title: "Do ISEC3004 homework.",
     },
     {
         username: "tristan",
-        title: "I ate something today.",
+        title: "Buy ice-cream.",
     },
     {
         username: "james",
-        title: "I ate watermelon today.",
+        title: "Do ISEC3004 homework.",
     },
     {
         username: "james",
-        title: "I ate grapes today.",
+        title: "Buy ice-cream.",
     },
-]
+];

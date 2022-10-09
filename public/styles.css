@@ -135,13 +135,13 @@ input {
     color: #cf3c3c;
 }
 
-.user-posts {
+.user-todoItems {
     max-height: 15rem;
     overflow-y: auto;
     margin-top: 0.8rem;
 }
 
-.user-posts li:not(:last-child) {
+.user-todoItems li:not(:last-child) {
     margin-bottom: 0.8rem;
 }
 

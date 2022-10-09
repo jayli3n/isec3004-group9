@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ObjectId } from "mongodb";
-import { fakePosts, fakeUsers, Post, User } from "./constants";
+import { fakeTodoItems, fakeUsers, TodoItem, User } from "./constants";
 import { getDb } from "./db/connectDb";
 
 // A very basic way of remember the logged in user, it's not proper auth logic
@@ -23,16 +23,16 @@ export const seedData = async (req: Request, res: Response) => {
     await users.deleteMany({});
     await users.insertMany(fakeUsers);
 
-    // Seed posts table
-    const posts = db.collection("posts");
-    await posts.deleteMany({});
-    await posts.insertMany(fakePosts);
+    // Seed todoItems table
+    const todoItems = db.collection("todoItems");
+    await todoItems.deleteMany({});
+    await todoItems.insertMany(fakeTodoItems);
 
-    const newPosts = await posts.find().toArray();
+    const newTodoItems = await todoItems.find().toArray();
     const newUsers = await users.find().toArray();
 
     res.json({
-        posts: newPosts,
+        todoItems: newTodoItems,
         users: newUsers,
     });
 };
@@ -41,9 +41,9 @@ export const seedData = async (req: Request, res: Response) => {
 export const loginPage = async (req: Request, res: Response, preventNoSQLInjection = false) => {
     let errorMessage = "";
 
-    // If user is logged in, redirect to welcome page
+    // If user is logged in, redirect to todo list page
     if (loggedInUserID) {
-        res.redirect("/welcome");
+        res.redirect("/todos");
         return;
     }
 
@@ -71,12 +71,12 @@ export const loginPage = async (req: Request, res: Response, preventNoSQLInjecti
             }
         }
 
-        // Check if username and password are correct, if yes, redirect to welcome page
+        // Check if username and password are correct, if yes, redirect to todos page
         const user = await db.collection("users").findOne({ username, password });
         if (user) {
             console.log("🟢 Successfully logged in.");
             loggedInUserID = user._id;
-            res.redirect("/welcome");
+            res.redirect("/todos");
             return;
         }
 
@@ -100,8 +100,8 @@ export const logout = async (req: Request, res: Response) => {
     res.redirect("/login");
 };
 
-// Returns the Welcome page
-export const welcomePage = async (req: Request, res: Response) => {
+// Returns the Todos page
+export const todoPage = async (req: Request, res: Response) => {
     // If user is not logged in, redirection to login page
 
     if (!loggedInUserID) {
@@ -127,25 +127,25 @@ export const welcomePage = async (req: Request, res: Response) => {
         return;
     }
 
-    // Get user posts
-    interface PostDoc extends Post {
+    // Get user todoItems
+    interface TodoItemDoc extends TodoItem {
         _id: ObjectId;
     }
-    const posts = (await db.collection("posts").find({ username: user.username }).toArray()) as PostDoc[];
-    // Insert new post works but gives error:
+    const todoItems = (await db.collection("todoItems").find({ username: user.username }).toArray()) as TodoItemDoc[];
+    // Insert new todoItem works but gives error:
     // Cannot send headers after they are send to the client
-    if (req.query.postTitle) {
+    if (req.query.todoItemTitle) {
         try {
-            db.collection("posts").insertOne({ username: user.username, title: req.query.postTitle });
-            res.redirect("/welcome"); //called res.redirect twice
+            db.collection("todoItems").insertOne({ username: user.username, title: req.query.todoItemTitle });
+            res.redirect("/todos"); //called res.redirect twice
         } catch {
             console.log("Failed to insert.");
         }
     } else {
         // Render the page
-        res.render("welcome", {
+        res.render("todoList", {
             username: user.username,
-            posts,
+            todoItems,
             isLoggedIn: !!loggedInUserID,
         });
     }

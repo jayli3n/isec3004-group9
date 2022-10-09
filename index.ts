@@ -3,7 +3,7 @@ import express, { Express } from "express";
 import { SERVER_PORT } from "./src/constants";
 import { domXSS, domXSS2 } from "./src/domBasedXSS";
 import { logRequests } from "./src/middlewares";
-import { indexPage, loginPage, logout, seedData, welcomePage } from "./src/noSQL";
+import { indexPage, loginPage, logout, seedData, todoPage } from "./src/noSQL";
 
 // Setup server
 const app: Express = express();
@@ -32,8 +32,8 @@ app.get("/login-safe", (req, res) => loginPage(req, res, true));
 // Logout
 app.get("/logout", logout);
 
-// Welcome page
-app.get("/welcome", welcomePage);
+// To do list page
+app.get("/todos", todoPage);
 
 // DOM based XSS
 app.get("/dom-xss", (req, res) => domXSS(req, res, false));

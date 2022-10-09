@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8" />
 		<link rel="stylesheet" type="text/css" href="styles.css" />
-        <title>Welcome {{username}}</title>
+        <title>{{username}}'s Todo List</title>
     </head>
 
     <body>
@@ -31,8 +31,7 @@
                 <h3 class="nav-menu-section__title">NoSQL Injection #1</h3>
                 <ul class="nav-menu-ul">
                     {{#if isLoggedIn}}
-                        <br/>
-                        <li><p>🔵 welcome page</p><a href="/welcome">/welcome</a></li>
+                        <li><p>🔵 todo list</p><a href="/todos">/todos</a></li>
                         <li><p>🔵 logout</p><a href="/logout">/logout</a></li>
                     {{else}}
                         <li><p>🔴 vulnerable</p><a href="/login">/login</a></li>
@@ -60,22 +59,22 @@
 
 		<div class="content">
             <div class="main">
-                <h1>Create new post</h1>
+                <h1>Create new todo item</h1>
 
-                <form action = "/welcome" method="get">
+                <form action = "/todos" method="get">
                     <div class = "question">
-                        <b><label for="postTitle">Post Title </label></b>
-                        <input type="text" name="postTitle" placeholder="Post Title"></input>
+                        <b><label for="todoItemTitle">TodoItem Title </label></b>
+                        <input type="text" name="todoItemTitle" placeholder="TodoItem Title"></input>
                     </div>
                     <button type="submit">SUBMIT</button>
                 </form>
             </div>
 
             <div class="main">
-                <h1>Your posts:</h1>
+                <h1>Your Todo List:</h1>
 
-                <ul class="user-posts">
-                    {{#each posts}}
+                <ul class="user-todoItems">
+                    {{#each todoItems}}
                         <li>
                             <p><strong>username:</strong> {{username}}</p>
                             <p>
