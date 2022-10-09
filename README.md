@@ -55,11 +55,27 @@ Execute arbitrary Javascript code on user's browser.
 
 -   Enter `asdf<script>alert("Malicious code executed, cookies stolen!");</script>` in the Text to Binary Converter.
 
+##### Problem:
+
+The code uses `document.write(...)` API to write elements into the DOM. This method is strongly discouraged as it evaluates an input string into HTML markup and inserts HTML elements into the DOM. Since the input string comes from the text input field, an attacker can include a `<script>` tag into the input string and perform arbitrary Javascript code.
+
+![image](https://user-images.githubusercontent.com/44139980/194741528-17eb8a81-90d2-4716-aef7-1f82e89072c4.png)
+
+##### Fix:
+
+Instead of using the `document.write(...)` API, we use a much safer method `element.innerText = "..."` to inject user input into the DOM, the input string will not evaluate into a HTML element, it will remain as a string.
+
+![image](https://user-images.githubusercontent.com/44139980/194741689-14b83bc5-da6c-4b0a-813e-a25a4b2fee19.png)
+
 ### 2️⃣ DOM-Based XSS #2:
 
 Execute arbitrary Javascript code on user's browser.
 
 -   Enter `http://localhost:8000/dom-xss2#Christine Bui"><img src="x" onerror="function f(){alert('Malicious code executed, cookies stolen!');} f()">` into the address bar.
+
+##### Problem:
+
+##### Fix:
 
 # For developers
 
