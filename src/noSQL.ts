@@ -43,7 +43,7 @@ export const loginPage = async (req: Request, res: Response, preventNoSQLInjecti
 
     // If user is logged in, redirect to todo list page
     if (loggedInUserID) {
-        res.redirect("/todos");
+        res.redirect("/todo-list");
         return;
     }
 
@@ -76,7 +76,7 @@ export const loginPage = async (req: Request, res: Response, preventNoSQLInjecti
         if (user) {
             console.log("🟢 Successfully logged in.");
             loggedInUserID = user._id;
-            res.redirect("/todos");
+            res.redirect("/todo-list");
             return;
         }
 
@@ -137,7 +137,7 @@ export const todoPage = async (req: Request, res: Response) => {
     if (req.query.todoItemTitle) {
         try {
             db.collection("todoItems").insertOne({ username: user.username, title: req.query.todoItemTitle });
-            res.redirect("/todos"); //called res.redirect twice
+            res.redirect("/todo-list"); //called res.redirect twice
         } catch {
             console.log("Failed to insert.");
         }
