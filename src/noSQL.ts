@@ -120,18 +120,12 @@ export const todoPage = async (req: Request, res: Response, isSafe: boolean) => 
     }
 
     const user = (await db.collection("users").findOne({ _id: loggedInUserID })) as UserDoc;
-
     // If user doesn't exist in db, then redirect to login page
     if (!user) {
         res.redirect("/login");
         return;
     }
 
-    // Get user todoItems
-    interface TodoItemDoc extends TodoItem {
-        _id: ObjectId;
-    }
-    const todoItems = (await db.collection("todoItems").find({ username: user.username }).toArray()) as TodoItemDoc[];
     // Insert new todoItem works but gives error:
     // Cannot send headers after they are send to the client
     if (req.query.newItem) {
@@ -141,13 +135,29 @@ export const todoPage = async (req: Request, res: Response, isSafe: boolean) => 
         } catch {
             console.log("Failed to insert.");
         }
-    } else {
-        // Render the page
-        res.render("todoList", {
-            username: user.username,
-            todoItems,
-            isLoggedIn: !!loggedInUserID,
-            isSafe,
-        });
+        return;
     }
+
+    // Get the search string from url query
+    // let search = ""
+    // if (req.query.search) {
+
+    // }
+
+    // Get user todoItems
+    interface TodoItemDoc extends TodoItem {
+        _id: ObjectId;
+    }
+    const todoItems = (await db
+        .collection("todoItems")
+        .find({ $where: `this.username == '${user.username}'` })
+        .toArray()) as TodoItemDoc[];
+
+    // Render the page
+    res.render("todoList", {
+        username: user.username,
+        todoItems,
+        isLoggedIn: !!loggedInUserID,
+        isSafe,
+    });
 };
