@@ -43,7 +43,7 @@ export const loginPage = async (req: Request, res: Response, preventNoSQLInjecti
 
     // If user is logged in, redirect to todo list page
     if (loggedInUserID) {
-        res.redirect("/todo-list-safe");
+        res.redirect("/todo-list");
         return;
     }
 
@@ -76,7 +76,7 @@ export const loginPage = async (req: Request, res: Response, preventNoSQLInjecti
         if (user) {
             console.log("🟢 Successfully logged in.");
             loggedInUserID = user._id;
-            res.redirect("/todo-list-safe");
+            res.redirect("/todo-list");
             return;
         }
 
@@ -142,17 +142,20 @@ export const todoPage = async (req: Request, res: Response, isSafe: boolean) => 
     interface TodoItemDoc extends TodoItem {
         _id: ObjectId;
     }
-    console.log(`this.title.toLowerCase().includes('${req.query.search?.toString().toLowerCase()}') && this.username == '${user.username}'`);
-    const todoItems = (await db
-        .collection("todoItems")
-        .find({ $where: `this.title.toLowerCase().includes('${req.query.search?.toString().toLowerCase() || ""}') && this.username == '${user.username}'` })
-        .toArray()) as TodoItemDoc[];
+    try {
+        const todoItems = (await db
+            .collection("todoItems")
+            .find({ $where: `this.title.toLowerCase().includes('${req.query.search || ""}') && this.username == '${user.username}'` })
+            .toArray()) as TodoItemDoc[];
 
-    // Render the page
-    res.render("todoList", {
-        username: user.username,
-        todoItems,
-        isLoggedIn: !!loggedInUserID,
-        isSafe,
-    });
+        // Render the page
+        res.render("todoList", {
+            username: user.username,
+            todoItems,
+            isLoggedIn: !!loggedInUserID,
+            isSafe,
+        });
+    } catch (err) {
+        console.log(err);
+    }
 };

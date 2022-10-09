@@ -88,7 +88,7 @@
             <div class="main">
                 <h1>Your Private Todo List:</h1>
 
-                <form action = "/todo-list" method="get">
+                <form method="get" action={{#if isSafe}}"/todo-list-safe"{{else}}"/todo-list"{{/if}}>
                     <div class = "question">
                         <b><label for="search">Search for a todo item{{#if isSafe}}<span style="color: #35A671;"> (SAFE)</span>{{/if}}:</label></b>
                         <div class="todo-search">

@@ -21,6 +21,12 @@ Log in as any existing user.
 
 The server will interpret that as `{ username: 'james', password: { '$ne': '' }`; the password is passed into MongoDb as a JSON object, where the criteria will always evaluate to `true`.
 
+### 1️⃣ NoSQL Injection #2:
+
+Get every user's private todo list.
+
+-   Enter `') || ('a'=='a) // ` into the search box.
+
 ### 1️⃣ DOM-Based XSS #1:
 
 -   Enter `asdf<script>alert("Malicious code executed, cookies stolen!");</script>` in the Text to Binary Converter.
