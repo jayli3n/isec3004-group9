@@ -32,8 +32,11 @@ app.get("/login-safe", (req, res) => loginPage(req, res, true));
 // Logout
 app.get("/logout", logout);
 
-// To do list page
-app.get("/todo-list", todoPage);
+// The todo list page
+app.get("/todo-list", (req, res) => todoPage(req, res, false));
+
+// The todo list page SAFE
+app.get("/todo-list-safe", (req, res) => todoPage(req, res, true));
 
 // DOM based XSS
 app.get("/dom-xss", (req, res) => domXSS(req, res, false));

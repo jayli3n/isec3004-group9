@@ -157,3 +157,12 @@ input {
 #dom-xss-2-placeholder {
     margin-top: 1rem;
 }
+
+.todo-search {
+    display: flex;
+    align-items: center;
+}
+
+.todo-search button {
+    transform: scale(0.8);
+}

@@ -43,7 +43,7 @@ export const loginPage = async (req: Request, res: Response, preventNoSQLInjecti
 
     // If user is logged in, redirect to todo list page
     if (loggedInUserID) {
-        res.redirect("/todo-list");
+        res.redirect("/todo-list-safe");
         return;
     }
 
@@ -76,7 +76,7 @@ export const loginPage = async (req: Request, res: Response, preventNoSQLInjecti
         if (user) {
             console.log("🟢 Successfully logged in.");
             loggedInUserID = user._id;
-            res.redirect("/todo-list");
+            res.redirect("/todo-list-safe");
             return;
         }
 
@@ -101,7 +101,7 @@ export const logout = async (req: Request, res: Response) => {
 };
 
 // Returns the Todos page
-export const todoPage = async (req: Request, res: Response) => {
+export const todoPage = async (req: Request, res: Response, isSafe: boolean) => {
     // If user is not logged in, redirection to login page
 
     if (!loggedInUserID) {
@@ -147,6 +147,7 @@ export const todoPage = async (req: Request, res: Response) => {
             username: user.username,
             todoItems,
             isLoggedIn: !!loggedInUserID,
+            isSafe,
         });
     }
 };

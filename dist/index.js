@@ -28,8 +28,10 @@ app.get("/login", (req, res) => (0, noSQL_1.loginPage)(req, res, false));
 app.get("/login-safe", (req, res) => (0, noSQL_1.loginPage)(req, res, true));
 // Logout
 app.get("/logout", noSQL_1.logout);
-// To do list page
-app.get("/todo-list", noSQL_1.todoPage);
+// The todo list page
+app.get("/todo-list", (req, res) => (0, noSQL_1.todoPage)(req, res, false));
+// The todo list page SAFE
+app.get("/todo-list-safe", (req, res) => (0, noSQL_1.todoPage)(req, res, true));
 // DOM based XSS
 app.get("/dom-xss", (req, res) => (0, domBasedXSS_1.domXSS)(req, res, false));
 // DOM based XSS SAFE
