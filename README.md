@@ -19,7 +19,15 @@ Log in as any existing user.
 
 -   Enter `http://localhost:8000/login?username=james&password[%24ne]=` into the address bar.
 
-The server will interpret that as `{ username: 'james', password: { '$ne': '' }`; the password is passed into MongoDb as a JSON object, where the criteria will always evaluate to `true`.
+##### Problem:
+
+The server will interpret that as `db.collection("users").findOne({ username: 'james', password: { '$ne': '' })`; the password is passed into MongoDb as a JSON object, where the criteria (password not equal to nothing) will always evaluate to `true`.
+
+##### Fix:
+
+We perform a basic validation check on any user input before passing ~~~~~~into~~~~~~ the database, if the user input is NOT a `string`, i.e. a JSON object, we return an error.
+
+![image](https://user-images.githubusercontent.com/44139980/194741238-f26250cf-af51-48c4-ba48-8609113ca76c.png)
 
 ### 2️⃣ NoSQL Injection #2:
 
@@ -27,11 +35,29 @@ Get every user's private todo list.
 
 -   Enter `') || ('a'=='a) //` into the search box.
 
+##### Problem:
+
+The code uses the `$where` query operator with un-validated user input, it is susceptible to Javascript script injections where an attacker can inject any arbitrary Javascript code.
+
+![image](https://user-images.githubusercontent.com/44139980/194741293-74fddb38-3758-498a-839f-f75c391f0ff2.png)
+
+The server will interpret the user input as `this.title.toLowerCase().includes('') || ('a'=='a) //') && this.username == 'james'` where the check for the username is commented out and doesn't run, which causes the query to return every user's private todo list.
+
+##### Fix:
+
+Instead of using the `$where` query operator, we use a `$regex` search which does NOT execute javascript code, the user input will remain as `string` type.
+
+![image](https://user-images.githubusercontent.com/44139980/194741455-b1944b93-1e84-4bd8-8830-6c75cada7dc6.png)
+
 ### 1️⃣ DOM-Based XSS #1:
+
+Execute arbitrary Javascript code on user's browser.
 
 -   Enter `asdf<script>alert("Malicious code executed, cookies stolen!");</script>` in the Text to Binary Converter.
 
 ### 2️⃣ DOM-Based XSS #2:
+
+Execute arbitrary Javascript code on user's browser.
 
 -   Enter `http://localhost:8000/dom-xss2#Christine Bui"><img src="x" onerror="function f(){alert('Malicious code executed, cookies stolen!');} f()">` into the address bar.
 

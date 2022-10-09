@@ -38,7 +38,7 @@ export const seedData = async (req: Request, res: Response) => {
 };
 
 // Returns the login page
-export const loginPage = async (req: Request, res: Response, preventNoSQLInjection = false) => {
+export const loginPage = async (req: Request, res: Response, isSafe = false) => {
     let errorMessage = "";
 
     // If user is logged in, redirect to todo list page
@@ -62,11 +62,11 @@ export const loginPage = async (req: Request, res: Response, preventNoSQLInjecti
         }
 
         // This code will manually check that password is type string, if not, return error
-        if (preventNoSQLInjection) {
+        if (isSafe) {
             if (typeof username !== "string" || typeof password !== "string") {
                 errorMessage = "🔴 The data you have entered seems like it could be a NoSQL Injection.";
                 console.log(errorMessage);
-                renderLoginPage(res, preventNoSQLInjection, errorMessage);
+                renderLoginPage(res, isSafe, errorMessage);
                 return;
             }
         }
@@ -84,15 +84,11 @@ export const loginPage = async (req: Request, res: Response, preventNoSQLInjecti
         console.log(errorMessage);
     }
 
-    renderLoginPage(res, preventNoSQLInjection, errorMessage);
+    renderLoginPage(res, isSafe, errorMessage);
 };
 
-const renderLoginPage = (res: Response, preventNoSQLInjection: boolean, errorMessage: string) => {
-    if (preventNoSQLInjection) {
-        res.render("login", { isSafe: true, isLoggedIn: !!loggedInUserID, errorMessage });
-    } else {
-        res.render("login", { isLoggedIn: !!loggedInUserID, errorMessage });
-    }
+const renderLoginPage = (res: Response, isSafe: boolean, errorMessage: string) => {
+    res.render("login", { isSafe, isLoggedIn: !!loggedInUserID, errorMessage });
 };
 
 export const logout = async (req: Request, res: Response) => {
