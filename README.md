@@ -21,7 +21,7 @@
 
 Log in as any existing user.
 
--   Enter `http://localhost:8000/login?username=james&password[%24ne]=` into the address bar.
+-   Enter `http://localhost:8001/login?username=james&password[%24ne]=` into the address bar.
 
 ##### <u>Problem:</u>
 
@@ -87,7 +87,7 @@ Instead of using the `document.write(...)` API, we use a much safer method `elem
 
 Execute any arbitrary Javascript code on user's browser.
 
--   Enter `http://localhost:8000/dom-xss2#Christine Bui"><img src="x" onerror="function f(){alert('Malicious code executed, cookies stolen!');} f()">` into the address bar.
+-   Enter `http://localhost:8001/dom-xss2#Christine Bui"><img src="x" onerror="function f(){alert('Malicious code executed, cookies stolen!');} f()">` into the address bar.
 
 ##### <u>Problem:</u>
 
