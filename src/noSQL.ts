@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ObjectId } from "mongodb";
+import { Db, ObjectId } from "mongodb";
 import { fakeTodoItems, fakeUsers, TodoItem, User } from "./constants";
 import { getDb } from "./db/connectDb";
 
@@ -10,14 +10,7 @@ export const indexPage = async (req: Request, res: Response) => {
     res.render("index", { isLoggedIn: !!loggedInUserID });
 };
 
-// Seeds random data into db
-export const seedData = async (req: Request, res: Response) => {
-    const db = await getDb();
-    if (!db) {
-        res.status(500).send("Server failed to initialize db.");
-        return;
-    }
-
+const seed = async (db: Db) => {
     // Seed users table
     const users = db.collection("users");
     await users.deleteMany({});
@@ -31,10 +24,21 @@ export const seedData = async (req: Request, res: Response) => {
     const newTodoItems = await todoItems.find().toArray();
     const newUsers = await users.find().toArray();
 
-    res.json({
+    return {
         todoItems: newTodoItems,
         users: newUsers,
-    });
+    };
+};
+
+// Seeds random data into db
+export const seedData = async (req: Request, res: Response) => {
+    const db = await getDb();
+    if (!db) {
+        res.status(500).send("Server failed to initialize db.");
+        return;
+    }
+    const result = await seed(db);
+    res.json(result);
 };
 
 // Returns the login page
@@ -60,6 +64,8 @@ export const loginPage = async (req: Request, res: Response, isSafe = false) => 
             res.status(500).send("Server failed to initialize db.");
             return;
         }
+
+        await seed(db);
 
         // This code will manually check that password is type string, if not, return error
         if (isSafe) {
@@ -109,6 +115,8 @@ export const todoPage = async (req: Request, res: Response, isSafe: boolean) => 
         res.status(500).send("Server failed to initialize db.");
         return;
     }
+
+    await seed(db);
 
     // Get the user from db
     interface UserDoc extends User {
