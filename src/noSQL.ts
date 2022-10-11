@@ -116,8 +116,6 @@ export const todoPage = async (req: Request, res: Response, isSafe: boolean) => 
         return;
     }
 
-    await seed(db);
-
     // Get the user from db
     interface UserDoc extends User {
         _id: ObjectId;
