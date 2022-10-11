@@ -14,6 +14,7 @@
 ### ✅ Build:
 
 -   Download and install [Docker](https://www.docker.com/products/docker-desktop/)
+-   Start Docker Desktop
 -   Run `make -i docker-build`
 -   Go to: `http://localhost:8001/`
 
